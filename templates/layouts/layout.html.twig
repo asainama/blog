@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{assets("favicon.png",{"type":"img"})}}" type="image/x-icon">
+    <meta name="description" content="Ce site est un blog"> <!-- Meta Description -->
+    <link rel="stylesheet" href="{{assets("style.css",{"type":"css"})}}">
+    {# <link rel="stylesheet" href="{{asset("style.css")}}"> #}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header class="row">
+        <div id="navbar">
+            <ul id="navbar__menu">
+                <li><a href="{{router.generate('index')}}">Accueil</a></li>
+                <li><a href="{{router.generate('blog')}}">Blog</a></li>
+                <li><a href="{{router.generate('contact')}}">Contact</a></li>
+            </ul>
+            <ul id="navbar__connect">
+                {% if isConnect() %}
+                    {% if isAdmin() %}
+                        <li>
+                            <a href="{{router.generate('admin_posts')}}">
+                                <img src="{{assets("management.png",{"type":"img"})}}" class="navbar__img" alt="administration">
+                            </a>
+                        </li>
+                    {% endif  %}
+                    <li>
+                        <form action="{{router.generate('logout',{},'POST')}}" method="post">
+                            <button type="submit">
+                                <img src="{{assets("power.png",{"type":"img"})}}" class="navbar__img" alt="deconnexion">
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{{router.generate('login')}}"><img src="{{assets("enter.png",{"type":"img"})}}" class="navbar__img" alt="signIn"></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <div class="row">
+            <div class="footer__logo">
+                <span>Me contacter</span>
+                <p>
+                    J'ai appris à créer des sites Web par moi-même.
+                    Je sais à quel point c'est amusant et gratifiant,
+                    mais je sais aussi que cela peut être incroyablement frustrant.
+                    Je suis là pour vous aider à rendre votre voyage dans le développement Web
+                    aussi simple et amusant que possible.
+                </p>
+            </div>
+            <div class="footer__uselinks">
+                <ul>
+                    <li><a href="{{router.generate('index')}}">Accueil</a><li/>
+                    <li><a href="{{router.generate('blog')}}">Blog</a></li>
+                    <li><a href="{{router.generate('contact')}}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer__socials">
+                <ul>
+                    <li><a href="#">Dribbble</a><li/>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Github</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
