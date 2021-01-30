@@ -21,7 +21,6 @@ class AuthentificationController extends AbstractController
             $user->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
             $user->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
             $isValidate = $this->validateUser(0, $user, $router, '/authentification/login.html.twig');
-            // dd($isValidate);
             if (!$isValidate) {
                 $this->checkUser($user, $router);
             }
@@ -55,7 +54,6 @@ class AuthentificationController extends AbstractController
                 if ($query === false) {
                     header('Location: ' . $router->generate('signin') . "?insert=0");
                 } else {
-                    // dd((new QueryBuilder())->getLastInsertId());
                     $mailer = (new Mailer())->sendMessageSubscribe($user);
                     if ($mailer) {
                         header('Location: ' . $router->generate('signin') . "?insert=1&mail=1");
