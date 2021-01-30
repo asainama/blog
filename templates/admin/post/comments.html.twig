@@ -1,0 +1,35 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Administration - Gestion des commentaires {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="post">
+        <div class="post__header">
+            <h1>Gestions des <span>commentaires</span></h1>
+        </div>
+        <form action="" class="comment__form" method="POST">
+            {% for comment in comments %}
+                <div class="comment">
+                    <h5>{{comment.getUsername()}}</h5>
+                    <span>{{comment.getCreatedAt()}}</span>
+                    <p>{{comment.getContent()}}</p>
+                </div>
+                <div class="form__group">
+                    <div class="form__radio">
+                        <label for="mode">Choix</label>
+                        <select name="{{comment.getId()}}" id="mode">
+                            <option value="0" selected>Attente</option>
+                            <option value="1">Accepter</option>
+                            <option value="2">Refuser</option>
+                        </select>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="form__group">
+                <div>
+                    <button type="submit" class="btn primary">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

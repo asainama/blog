@@ -1,0 +1,76 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Administration - Article {% endblock %}
+{% block content %}
+<div class="row">
+    {% if isCheck("delete") == 1 %}
+        <div class="message message__success">
+            <p>L'article a été supprimé avec succès</p>
+        </div>
+    {% endif %}
+    {% if isCheck("commentValidate") == 0 %}
+        <div class="message message__error">
+            <p>Une erreur est survenue</p>
+        </div>
+    {% endif %}
+    {% if isCheck("commentValidate") == 1 %}
+        <div class="message message__success">
+            <p>Le(s) commentaire(s) ont bien été traité</p>
+        </div>
+    {% endif %}
+    {% if isCheck("update") == 1 %}
+        <div class="message message__success">
+            <p>L'article a été modifié avec succès</p>
+        </div>
+    {% endif %}
+
+    {% if isCheck("created") == 0 %}
+        <div class="message message__error">
+            <p>L'article n'a pas été crée</p>
+        </div>
+    {% elseif isCheck("created") == 1 %}
+        <div class="message message__success">
+            <p>L'article a été crée avec succès</p>
+        </div>
+    {% endif %}
+    <a href="{{router.generate('admin_post_new')}}" class="btn primary">Ajouter un article</a>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Titre</th>
+            <th>En attente</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td class="table__title" data-label="ID">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}">
+                        #{{post.getId()}}
+                    </a>
+                </td>
+                <td class="table__title" data-label="Titre">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}">
+                        {{post.getTitle()}}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{router.generate('admin_post_comments',{'id': post.getId()})}}" class="btn success {{post.comments == "0" ? "none" : ""}}" data-comments={{post.comments != "0" ? post.comments : ""}} >
+                        Commentaires
+                    </a>
+                </td>
+                <td class="table__actions" data-label="Actions">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}" class="btn primary">
+                        Editer
+                    </a>
+                    <form action="{{router.generate('admin_post_delete',{'id': post.getId()},'POST')}}" method="POST" onsubmit="return confirm('Voulez vous vraiment effectuer cette action ?')">
+                        <button class="btn danger" type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% set link = router.generate('admin_posts') %}
+    {% include ('/post/paginate.html.twig') %}
+</div>
+{% endblock %}

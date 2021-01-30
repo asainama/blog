@@ -1,0 +1,9 @@
+<div class="form__group">
+    <div>
+        <label for="code" class="form__label">Code</label>
+        <input type="text" id="code" name="code" class="form__input">
+        {% if errors['code'] is defined %}
+            {{showError(errors['code'])}}
+        {% endif %}
+    </div>
+</div>

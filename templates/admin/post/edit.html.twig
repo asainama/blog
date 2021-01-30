@@ -1,0 +1,59 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Administration - Modifier Article {% endblock %}
+{% block content %}
+<div class="row">
+    {% if errors is not empty  %}
+        <div class="message message__error">
+            <p>L'article n'a été modifié</p>
+        </div>
+    {% endif %}
+    <div class="post">
+        <div class="post__header">
+            <h1>Modifier un <span>article</span></h1>
+        </div>
+        <form action="" class="post__form" method="POST">
+            <div class="form__group">
+                <div>
+                    <label for="title" class="form__label">Titre</label>
+                    <input type="text" id="title" name="title" class="form__input" value="{{post.getTitle()}}">
+                    {% if errors['title'] is defined %}
+                        {{showError(errors['title'])}}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form__group">
+                <div>
+                    <label for="chapo" class="form__label">Chapo</label>
+                    <textarea id="chapo" name="chapo" class="form__textarea">{{post.getChapo()}}</textarea>
+                    {% if errors['chapo'] is defined %}
+                        {{showError(errors['chapo'])}}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form__group">
+                <div>
+                    <label for="content" class="form__label">Contenu</label>
+                    <textarea id="content" name="content" class="form__textarea">{{post.getContent()}}</textarea>
+                    {% if errors['content'] is defined %}
+                        {{showError(errors['content'])}}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form__group">
+                <div class="form__radio">
+                    <span>Mode public </span>
+                    <label for="draft" class="form__label switch">
+                        <input type="checkbox" id="draft" name="draft" class="form__checkbox" {{ post.getDraft() ? 'checked' : '' }}/>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form__group">
+                <div>
+                    <button type="submit" class="btn primary">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

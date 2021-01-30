@@ -41,4 +41,13 @@ $router
     ->post('/logout', 'AuthentificationController#logout', 'logout')
     ->get('/signin', 'AuthentificationController#signIn', 'signin')
     ->post('/signin', 'AuthentificationController#signIn', 'signin')
+    // Admin
+    ->get('/admin', 'AdminController#postindex', 'admin_posts')
+    ->get('/admin/post/[i:id]', 'AdminController#postEdit', 'admin_post_edit')
+    ->post('/admin/post/[i:id]', 'AdminController#postEdit', 'admin_post_edit')
+    ->get('/admin/post/new', 'AdminController#postNew', 'admin_post_new')
+    ->post('/admin/post/new', 'AdminController#postNew', 'admin_post_new')
+    ->post('/admin/post/delete/[i:id]', 'AdminController#postDelete', 'admin_post_delete')
+    ->get('/admin/post/comments/[i:id]', 'AdminController#postComments', 'admin_post_comments')
+    ->post('/admin/post/comments/[i:id]', 'AdminController#postComments', 'admin_post_comments')
     ->run();

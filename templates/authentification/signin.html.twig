@@ -1,0 +1,59 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} S'enregistrer {% endblock %}
+{% block content %}
+<div class="row">
+    {% if isCheck("accesstoken") == 1 %}
+        <div class="message message__error">
+            <p>Session expirée</p>
+        </div>
+    {% endif %}
+    {% if isCheck("insert") == 1 %}
+        <div class="message message__success">
+            <p>Inscription réussite</p>
+        </div>
+    {% endif %}
+    {% if isCheck("insert") == 0 %}
+        <div class="message message__error">
+            <p>L'inscription a échoué</p>
+        </div>
+    {% endif %}
+    <div class="login">
+        <div class="login__header">
+            <h1>S'<span>inscrire</span></h1>
+        </div>
+        {% if isCheck("mail") == 1 %}
+            <div class="message__mailer">
+                <p>Pour confirmer votre compte un code vous a été envoyé.</p>
+            </div>
+        {% endif %}
+        <form action="{{router.generate('signin')}}" class="post__form" method="POST">
+            <div class="form__group">
+                <div>
+                    <label for="username" class="form__label">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" class="form__input">
+                    {% if errors['username'] is defined %}
+                        {{showError(errors['username'])}}
+                    {% endif %}
+                </div>
+            </div>
+            {% include '/authentification/form.html.twig' %}
+            <div class="form__group">
+                <div>
+                    <label for="repassword" class="form__label">Retaper Mot de passe</label>
+                    <input type="password" id="repassword" name="repassword" class="form__input">
+                    {% if errors['repassword'] is defined %}
+                        {{showError(errors['repassword'])}}
+                    {% endif %}
+                </div>
+            </div>
+            {{csrf()}}
+            <div class="form__group">
+                <div>
+                    <a href="{{router.generate('login')}}" class="btn primary">Se connecter</a>
+                    <button type="submit" class="btn success">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

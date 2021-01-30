@@ -1,0 +1,18 @@
+<div class="form__group {{code == 1 ? "hidden" : ""}}">
+    <div>
+        <label for="email" class="form__label">Email</label>
+        <input type="text" id="email" name="email" class="form__input"  value="{{user.getEmail()}}">
+        {% if errors['email'] is defined %}
+            {{showError(errors['email'])}}
+        {% endif %}
+    </div>
+</div>
+<div class="form__group {{code == 1 ? "hidden" : ""}}">
+    <div>
+        <label for="password" class="form__label">Mot de passe</label>
+        <input type="password" id="password" name="password" class="form__input">
+        {% if errors['password'] is defined %}
+            {{showError(errors['password'])}}
+        {% endif %}
+    </div>
+</div>
