@@ -1,0 +1,28 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Accueil {% endblock %}
+{% block content %}
+<div class="row">
+    {% if isValid is defined and isValid == true %}
+        <div class="message message__success">
+            <p>Votre commentaire a bien été enregistré et sera valider prochainement</p>
+        </div>
+    {% endif %}
+    {% if isValid is defined and isValid == false %}
+        <div class="message message__error">
+            <p>Une erreur est survenue votre commentaire n'a pas été valider</p>
+        </div>
+    {% endif %}
+    <div class="post">
+        <div class="post__body">
+            <div class="post__ariane"><span>Blog</span><span>{{post.getSlug()}}</span></div>
+            <h5 class="post__title">
+                {{post.getTitle()}}
+            </h5>
+            <h6 class="post__date">{{post.getCreatedAt()}}</h6>
+            <p class="post__chapo">{{post.getChapo()}}</p>
+            <p class="post__content">{{post.getContent()}}</p>
+        </div>
+    </div>
+    {% include ('/post/comment.html.twig') %}
+</div>
+{% endblock %}
