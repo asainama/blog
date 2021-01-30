@@ -30,4 +30,9 @@ $router = new Router($_SERVER['REQUEST_URI']);
 
 $router
     ->get('/', 'HomeController#index', 'index')
+    ->get('/blog', 'BlogController#index', 'blog')
+    ->get('/blog/[*:slug]-[i:id]', 'BlogController#show', 'show')
+    ->post('/blog/[*:slug]-[i:id]', 'BlogController#show', 'show')
+    ->get('/contact', 'ContactController#index', 'contact')
+    ->post('/contact', 'ContactController#index', 'contact')
     ->run();
