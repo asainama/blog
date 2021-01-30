@@ -145,7 +145,6 @@ class QueryBuilder
                 $parts[] = "*";
             }
         }
-        // dd(empty($this->update));
         if (empty($this->update) & empty($this->insert)) {
             $parts[] = 'FROM';
             $parts[] = $this->buildFrom();
@@ -159,11 +158,7 @@ class QueryBuilder
         }
         if (!empty($this->values)) {
             $parts[] = "VALUES";
-            // $values = str_replace("',", "','", $this->values);
-            // dd($this->values);
-            // $parts[] = "('" . join("') AND ('", str_replace(",", "','", $this->values)) . "')";
             $parts[] = '("' . join('") AND ("', str_replace("§", '","', $this->values)) . '")';
-            // $parts[] = '("' . join('") AND ("', $this->values) . '")';
         }
         if (!empty($this->where)) {
             $parts[] = "WHERE";

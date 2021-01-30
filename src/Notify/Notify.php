@@ -15,9 +15,7 @@ class Notify implements SplObserver
      */
     public function update(SplSubject $subject)
     {
-        // dd("La classe Notify a été alerté. L'article '" . $subject->getComment()->getContent() . "' a été crée.\n");
         $this->sendMessageComment($subject);
-        // Ici dans un cas réel, on envoie un e-mail à tous les utilisateurs avec un lien vers le nouvel article
     }
 
     public function sendMessageComment($comment)
