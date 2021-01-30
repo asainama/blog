@@ -1,0 +1,63 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Se connecter {% endblock %}
+{% block content %}
+<div class="row">
+    {% if isCheck("denied") == 1 %}
+        <div class="message message__error">
+            <p>Vous ne pouvez pas accéder par cette page</p>
+        </div>
+    {% endif %}
+    {% if isCheck("denied") == 0 %}
+        <div class="message message__success">
+            <p>Vous êtes déconnecté</p>
+        </div>
+    {% endif %}
+    {% if isCheck("created") == 1 %}
+        <div class="message message__error">
+            {# <p>Echec de le création du compte</p> #}
+            <p>Une erreur est survenue</p>
+        </div>
+    {% endif %}
+    {% if errordenied is defined %}
+        <div class="message message__error">
+            <p>Identifiants incorrects</p>
+        </div>
+    {% endif %}
+    {% if isCheck("accesstoken") == 1 %}
+        <div class="message message__error">
+            <p>Session expirée</p>
+        </div>
+    {% endif %}
+    {% if isCheck("unkrown") == 1 %}
+        <div class="message message__error">
+            <p>L'utilisateur n'existe pas</p>
+        </div>
+    {% endif %}
+    {# {% if isCheck("denied") == 2 %}
+        <div class="message message__success">
+            <p>Vous êtes déjà déconnecter</p>
+        </div>
+    {% endif %} #}
+    {% set code = isCheck("code") == 1 %}
+    <div class="login">
+        <div class="login__header">
+            <h1>Se <span>connecter</span></h1>
+        </div>
+        <form action="{{(code == 1) ? router.generate('code', {}, 'POST') : router.generate('login')}}" class="post__form" method="POST">
+            {% include '/authentification/form.html.twig' %}
+            {% if code %}
+                {% include '/authentification/code.html.twig' %}
+            {% endif %}
+            {{csrf()}}
+            <div class="form__group">
+                <div>
+                    {% if code is not defined or code == false %}
+                        <a href="{{router.generate('signin')}}" class="btn primary">S'inscrire</a>
+                    {% endif %}
+                    <button type="submit" class="btn success">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
