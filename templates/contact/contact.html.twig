@@ -1,0 +1,71 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Contact {% endblock %}
+{% block content %}
+    <div class="row">
+        {% if isCheck("mailervalidate") == 1 %}
+            <div class="message message__success">
+                <p>Mail envoyé</p>
+            </div>
+        {% endif %}
+        {% if isCheck("mailertransport") == 1 %}
+            <div class="message message__error">
+                <p>Transport Error</p>
+            </div>
+        {% endif %}
+        {% if isCheck("accesstoken") == 1 %}
+            <div class="message message__error">
+                <p>Session expirée</p>
+            </div>
+        {% endif %}
+        <div class="contact">
+            <div class="contact__header">
+                <h1>Me <span>contacter</span></h1>
+                <p>
+                    Vous souhaitez des renseignements!
+                </p>
+            </div>
+            <form action="{{router.generate('contact')}}" method="POST" class="contact__form">
+                <div class="form__group">
+                    <div>
+                        <label for="firstname" class="form__label">Votre nom</label>
+                        <input type="text" id="firstname" name="firstname" class="form__input" value={{contact.getFirstname()}}>
+                        {% if errors['firstname'] is defined %}
+                            {{showError(errors['firstname'])}}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="lastname" class="form__label">Votre prénom</label>
+                        <input type="text" id="lastname" name="lastname" class="form__input" value={{contact.getLastname()}}>
+                        {% if errors['lastname'] is defined %}
+                            {{showError(errors['lastname'])}}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form__group">
+                    <div>
+                        <label for="email" class="form__label">Votre email</label>
+                        <input type="text" id="email" name="email" class="form__input" value={{contact.getEmail()}}>
+                        {% if errors['email'] is defined %}
+                            {{showError(errors['email'])}}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form__group">
+                    <div>
+                        <label for="message" class="form__label">Votre message</label>
+                        <textarea id="message" name="message" class="form__textarea" >{{contact.getMessage()}}</textarea>
+                        {% if errors['message'] is defined %}
+                            {{showError(errors['message'])}}
+                        {% endif %}
+                    </div>
+                </div>
+                {{csrf()}}
+                <div class="form__group">
+                    <div>
+                        <button type="submit" class="btn primary">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
