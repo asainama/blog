@@ -35,4 +35,10 @@ $router
     ->post('/blog/[*:slug]-[i:id]', 'BlogController#show', 'show')
     ->get('/contact', 'ContactController#index', 'contact')
     ->post('/contact', 'ContactController#index', 'contact')
+    ->get('/login', 'AuthentificationController#login', 'login')
+    ->post('/login', 'AuthentificationController#login', 'login')
+    ->post('/login/code', 'AuthentificationController#code', 'code')
+    ->post('/logout', 'AuthentificationController#logout', 'logout')
+    ->get('/signin', 'AuthentificationController#signIn', 'signin')
+    ->post('/signin', 'AuthentificationController#signIn', 'signin')
     ->run();
