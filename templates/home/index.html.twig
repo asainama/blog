@@ -1,0 +1,12 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Accueil {% endblock %}
+{% block content %}
+    <div class="row">
+    {% if isCheck("granted") == 1 %}
+        <div class="message message__success">
+            <p>Vous êtes connecté</p>
+        </div>
+    {% endif %}
+        <h1>Accueil</h1>
+    </div>
+{% endblock %}

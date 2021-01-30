@@ -1,0 +1,20 @@
+{
+    "name": "sylva/blogp5",
+    "description": "Ce site est un blog dans le cadre d'un projet OP",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "symfony/var-dumper": "^5.2",
+        "filp/whoops": "^2.9",
+        "fakerphp/faker": "^1.13"
+    },
+    "require": {
+        "twig/twig": "^3.2",
+        "vlucas/phpdotenv": "^5.3",
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
