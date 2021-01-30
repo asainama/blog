@@ -1,0 +1,15 @@
+{% extends '/layouts/layout.html.twig' %}
+{% block title %} Accueil {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="card__header">
+            <h1>Tous les <span>articles</span></h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, deserunt.</p>
+        </div>
+        {% for post in posts %}
+            {% include ('/post/card.html.twig') %}
+        {% endfor %}
+        {% set link = router.generate('blog') %}
+        {% include ('/post/paginate.html.twig') %}
+    </div>
+{% endblock %}

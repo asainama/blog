@@ -1,0 +1,29 @@
+{% if isConnect() %}
+    <form action="" class="comment__form" method="POST">
+        <h3>Ajouter un commentaire</h3>
+        <div class="form__group">
+            <div>
+                <label for="comment" class="form__label">Commentaire</label>
+                <textarea id="comment" name="content" class="form__textarea">{{comment.getContent()}}</textarea>
+                {% if errors['content'] is defined %}
+                    {{showError(errors['content'])}}
+                {% endif %}
+            </div>
+        </div>
+        <div class="form__group">
+            <div>
+                <button type="submit" class="btn success">Envoyer</button>
+            </div>
+        </div>
+    </form>
+{% endif %}
+<div class="comments">
+    {% for comment in comments %}
+        <div class="comment">
+            <h5>{{comment.username}}</h5>
+            <span>{{comment.getCreatedAt()}}</span>
+            <p>{{comment.getContent()}}</p>
+        </div>
+        {# {{comment.getId()}} #}
+    {% endfor %}
+</div>

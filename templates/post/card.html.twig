@@ -1,0 +1,14 @@
+<div class="col">
+    <div class="card">
+        <div class="card__body">
+            <h5 class="card__title">
+                {{post.getTitle()|excerpt(40)}}
+            </h5>
+            <h6 class="card__date">{{post.getCreatedAt()}}</h6>
+            <p class="card__content">{{post.getContent()|excerpt}}</p>
+            <div class="card__actions">
+                <a href="{{router.generate('show',{'id':post.getId(),'slug':post.getSlug()})}}" class="btn primary">Voir plus</a>
+            </div>
+        </div>
+    </div>
+</div>
