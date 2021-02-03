@@ -15,7 +15,7 @@ class Error404Controller extends AbstractController
     public function index(Router $router)
     {
         http_response_code(404);
-        echo $this->twig->render(
+        return $this->twig->render(
             '/error/404.html.twig',
             [
             'router' => $router

@@ -2,22 +2,21 @@
 
 namespace App\Controllers;
 
-use App\Notify\Notify;
 use PDO;
 use DateTime;
 use Exception;
 use App\Model\Post;
 use App\Helpers\Url;
 use App\Model\Comment;
+use App\Notify\Notify;
 use App\Router\Router;
 use App\Helpers\QueryBuilder;
+use App\Helpers\SessionHelper;
 use App\Manager\CommentManager;
 use App\Validator\CommentValidator;
 
 class BlogController extends AbstractController
 {
-    const PERPAGE = 12;
-
     /**
      * Show index page
      *
@@ -29,7 +28,7 @@ class BlogController extends AbstractController
         $currentPage = Url::getPositiveInt('page', 1);
         /** @var QueryBuilder */
         $count = (new QueryBuilder())->from("Post")->count();
-        $pages = ceil($count / self::PERPAGE);
+        $pages = ceil($count / 12);
         if ($currentPage > $pages) {
             throw new Exception('Cette page n\'existe pas');
         }
@@ -38,7 +37,7 @@ class BlogController extends AbstractController
         ->from('Post')
         ->where('draft = 1')
         ->orderBy("created_at", "DESC")
-        ->limit(self::PERPAGE)
+        ->limit(12)
         ->page($currentPage)
         ->execute();
         $posts = $query
@@ -46,7 +45,7 @@ class BlogController extends AbstractController
             PDO::FETCH_CLASS,
             Post::class
         );
-        echo $this->twig->render(
+        return $this->twig->render(
             '/post/index.html.twig',
             [
                 'posts' => $posts,
@@ -92,9 +91,7 @@ class BlogController extends AbstractController
                 header('Location: ', $url);
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
+                SessionHelper::sessionStart();
                 $id = json_decode($_SESSION['auth'], true)['id'];
                 $comment = new Comment();
                 $comment->setContent(isset($_POST['content']) ? $_POST['content'] : null);
@@ -107,7 +104,7 @@ class BlogController extends AbstractController
                 $commentValidator->isValid();
                 $errors = $commentValidator->error();
                 if (!empty($errors)) {
-                    echo $this->twig->render(
+                    return $this->twig->render(
                         '/post/show.html.twig',
                         [
                             'post' => $post,
@@ -123,7 +120,7 @@ class BlogController extends AbstractController
                     $commentManager->attach($notify);
                     $query = $commentManager->insertComment($comment);
                     if ($query === false) {
-                        echo $this->twig->render(
+                        return $this->twig->render(
                             '/post/show.html.twig',
                             [
                                 'post' => $post,
@@ -135,7 +132,7 @@ class BlogController extends AbstractController
                     } else {
                         // TODO: Email de demande de Validation
                         // Oberserver Pattern
-                        echo $this->twig->render(
+                        return $this->twig->render(
                             '/post/show.html.twig',
                             [
                                 'post' => $post,
@@ -147,7 +144,7 @@ class BlogController extends AbstractController
                     }
                 }
             } else {
-                echo $this->twig->render(
+                return $this->twig->render(
                     '/post/show.html.twig',
                     [
                         'post' => $post,

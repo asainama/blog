@@ -9,9 +9,7 @@ class Auth
 {
     public static function isConnect()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        SessionHelper::sessionStart();
         if (!isset($_SESSION['auth'])) {
             throw new AccessDeniedException("Accès non autorisé", 403);
         }
@@ -19,9 +17,7 @@ class Auth
     
     public static function isAdmin()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        SessionHelper::sessionStart();
         if (isset($_SESSION['auth'])) {
             $auth = json_decode($_SESSION['auth'], true);
             if ($auth['role'] === 1) {
@@ -40,7 +36,6 @@ class Auth
             exit();
         }
         unset($_SESSION['auth']);
-        // session_destroy();
         header('Location: ' . $router->generate('login') . '?denied=0');
     }
 }

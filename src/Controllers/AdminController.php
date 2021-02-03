@@ -20,8 +20,8 @@ class AdminController extends AbstractController
     {
         $currentPage = Url::getPositiveInt('page', 1);
         /** @var QueryBuilder */
-        // $count = (new QueryBuilder())->from("Post")->count();
-        $pages = ceil(50 / 12);
+        $count = (new QueryBuilder())->from("Post")->count();
+        $pages = ceil($count / 12);
         if ($currentPage > $pages) {
             throw new \Exception('Cette page n\'existe pas');
         }
@@ -40,7 +40,7 @@ class AdminController extends AbstractController
                 ->execute();
         $posts = $query->fetchAll(\PDO::FETCH_CLASS, Post::class);
         if ($posts !== false) {
-            echo $this->twig->render(
+            return $this->twig->render(
                 'admin/post/index.html.twig',
                 [
                     'posts' => $posts,
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
                     ->execute();
             $query->setFetchMode(PDO::FETCH_CLASS, Post::class);
             $post = $query->fetch();
-            echo $this->twig->render(
+            return $this->twig->render(
                 'admin/post/edit.html.twig',
                 [
                     'post' => $post,
@@ -91,7 +91,7 @@ class AdminController extends AbstractController
             $post = $this->initPost();
             $this->validatePost($post, $router, 'admin/post/new.html.twig', 'created', 1);
         }
-        echo $this->twig->render(
+        return $this->twig->render(
             'admin/post/new.html.twig',
             [
                 'router' => $router
@@ -153,7 +153,7 @@ class AdminController extends AbstractController
                 exit();
             } else {
                 $comments = $query->fetchAll(PDO::FETCH_CLASS, Comment::class);
-                echo $this->twig->render(
+                return $this->twig->render(
                     '/admin/post/comments.html.twig',
                     [
                         'router' => $router,
@@ -211,7 +211,7 @@ class AdminController extends AbstractController
         $postValidator->isValid();
         if ($postValidator->error()) {
             $errors = $postValidator->error();
-            echo $this->twig->render(
+            return $this->twig->render(
                 $url,
                 [
                     'post' => $post,

@@ -9,9 +9,7 @@ class CSRF
     public static function createToken(): ?string
     {
         $token = md5(time());
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        SessionHelper::sessionStart();
         $_SESSION['token'] = $token;
         return <<<HTML
         <input type="hidden" name="token" value="$token" />
@@ -20,9 +18,7 @@ HTML;
 
     public static function verifToken(?string $token = null, Router $router, string $name): bool
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        SessionHelper::sessionStart();
         if (isset($_SESSION['token']) && $_SESSION['token'] === $token) {
             return true;
         }
