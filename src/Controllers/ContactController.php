@@ -30,7 +30,7 @@ class ContactController extends AbstractController
             $contactValidator->isValid();
             $errors = $contactValidator->error();
             if (!empty($errors)) {
-                echo $this->twig->render(
+                return $this->twig->render(
                     '/contact/contact.html.twig',
                     [
                     'contact' => $contact,
@@ -43,7 +43,7 @@ class ContactController extends AbstractController
                 $mailer->sendMessageContact($contact, $router);
             }
         } else {
-            echo $this->twig->render(
+            return $this->twig->render(
                 '/contact/contact.html.twig',
                 [
                 'router' => $router

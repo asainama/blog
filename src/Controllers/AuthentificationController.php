@@ -8,6 +8,7 @@ use App\Helpers\CSRF;
 use App\Router\Router;
 use App\Helpers\Mailer;
 use App\Helpers\QueryBuilder;
+use App\Helpers\SessionHelper;
 use App\Validator\UserValidator;
 use App\Validator\SignInValidator;
 
@@ -25,7 +26,7 @@ class AuthentificationController extends AbstractController
                 $this->checkUser($user, $router);
             }
         } else {
-            echo $this->twig->render(
+            return $this->twig->render(
                 '/authentification/login.html.twig',
                 [
                     'router' => $router
@@ -63,7 +64,7 @@ class AuthentificationController extends AbstractController
                 }
             }
         } else {
-            echo $this->twig->render(
+            return $this->twig->render(
                 '/authentification/signin.html.twig',
                 [
                     'router' => $router
@@ -74,9 +75,7 @@ class AuthentificationController extends AbstractController
     public function code(Router $router)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
+            SessionHelper::sessionStart();
             $obj = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             $userArray = json_decode($obj, true);
             $code = isset($_POST['code']) ? $_POST['code'] : null;
@@ -99,9 +98,7 @@ class AuthentificationController extends AbstractController
                     header('Location:' . $router->generate('login') . '?created=0');
                     exit();
                 } else {
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
+                    SessionHelper::sessionStart();
                     $_SESSION['auth'] = json_encode(
                         array(
                             "id" => $user->getId(),
@@ -152,9 +149,7 @@ class AuthentificationController extends AbstractController
             }
             if (isset($_POST['password']) && !empty($_POST['password'])) {
                 if (password_verify($_POST['password'], $user2->getPassword())) {
-                    if (session_status() === PHP_SESSION_NONE) {
-                        session_start();
-                    }
+                    SessionHelper::sessionStart();
                     if ($user2->getValidate() === "0") {
                         $_SESSION['user'] = json_encode($user2->getArrayFromObject());
                         http_response_code(302);
@@ -171,7 +166,7 @@ class AuthentificationController extends AbstractController
                     header('Location: ' . $router->generate('index') . '?granted=1');
                     exit();
                 } else {
-                    echo $this->twig->render(
+                    return $this->twig->render(
                         '/authentification/login.html.twig',
                         [
                             'router' => $router,
@@ -196,7 +191,7 @@ class AuthentificationController extends AbstractController
         
         if ($userValidator->error()) {
             $errors = array_merge($userValidator->error(), $errors);
-            echo $this->twig->render(
+            return $this->twig->render(
                 $url,
                 [
                     'post' => $user,
