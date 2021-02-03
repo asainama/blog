@@ -1,5 +1,5 @@
-@import './font.css';
-@import './reset.css';
+@import "./font.css";
+@import "./reset.css";
 
 * {
     margin : 0;
@@ -8,15 +8,15 @@
 
 html {
     box-sizing : border-box;
-    font-size  : .625em;
-    font-size  : calc(1em * .625);
+    font-size  : 0.625em;
+    font-size  : calc(1em * 0.625);
     font-size  : 62.5%;
     /* base de "10px" au lieu de "16px" */
     line-height: 1.4;
 }
 
 body {
-    font-family          : 'Inter', sans-serif;
+    font-family          : "Inter", sans-serif;
     font-size            : 1.4em;
     min-height           : 100vh;
     display              : -webkit-box;
@@ -72,7 +72,7 @@ h5 {
 }
 
 .btn {
-    padding      : .5em 2em;
+    padding      : 0.5em 2em;
     margin       : 1.5em 0;
     border-radius: 5px;
     transition   : all 3ms;
@@ -82,34 +82,34 @@ h5 {
 
 .primary {
     background: rgb(121, 148, 212);
-    color     : #FFF;
+    color     : #fff;
     border    : 1px solid rgb(121, 148, 212);
 }
 
 .primary:hover {
-    background: #FFF;
+    background: #fff;
     color     : rgb(121, 148, 212);
 }
 
 .success {
     background: #41cf7c;
-    color     : #FFF;
+    color     : #fff;
     border    : 1px solid #41cf7c;
 }
 
 .success:hover {
-    background: #FFF;
+    background: #fff;
     color     : #41cf7c;
 }
 
 .danger {
     background: rgba(254, 179, 43, 0.6);
-    color     : #FFF;
+    color     : #fff;
     border    : 1px solid rgba(254, 179, 43, 0.6);
 }
 
 .danger:hover {
-    background: #FFF;
+    background: #fff;
     color     : rgba(254, 179, 43, 0.6);
 }
 
@@ -128,7 +128,7 @@ header {
     justify-content: space-evenly;
     align-items    : center;
     width          : 100%;
-    border-bottom  : 1px solid rgba(0, 0, 0, .125);
+    border-bottom  : 1px solid rgba(0, 0, 0, 0.125);
     margin         : 0 auto 1em auto;
 }
 
@@ -150,7 +150,7 @@ header {
 
 #navbar li a {
     font-weight   : bolder;
-    padding-bottom: .5em;
+    padding-bottom: 0.5em;
     /* transition : all 300ms; */
 }
 
@@ -213,8 +213,8 @@ header {
     max-width     : 18em;
     width         : 100%;
     height        : 100%;
-    border        : 1px solid rgba(0, 0, 0, .125);
-    border-radius : .25rem;
+    border        : 1px solid rgba(0, 0, 0, 0.125);
+    border-radius : 0.25rem;
     position      : relative;
     display       : flex;
     flex-direction: column;
@@ -224,9 +224,9 @@ header {
 
 .card::after {
     position     : absolute;
-    content      : '';
-    border       : 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
+    content      : "";
+    border       : 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
     top          : 0;
     left         : 0;
     right        : -6px;
@@ -285,7 +285,7 @@ header {
 
 .post__ariane span:last-child:before {
     content: "<";
-    padding: 0 .2em;
+    padding: 0 0.2em;
 }
 
 .post__title {
@@ -303,7 +303,7 @@ header {
 
 .post__chapo {
     margin     : 1em auto;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-style : italic;
     font-size  : 2rem;
     line-height: 1.4;
@@ -348,7 +348,7 @@ header {
 .comment {
     margin       : 1em auto;
     width        : 85%;
-    border       : 1px solid rgba(0, 0, 0, .2);
+    border       : 1px solid rgba(0, 0, 0, 0.2);
     padding      : 1em;
     border-radius: 3px;
     box-shadow   : 0 2px 4px #d8e1e8;
@@ -357,9 +357,9 @@ header {
 
 .comment::after {
     position     : absolute;
-    content      : '';
-    border       : 1px solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
+    content      : "";
+    border       : 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
     top          : 0;
     left         : 0;
     right        : -6px;
@@ -410,9 +410,9 @@ header {
 }
 
 .message__error {
-    background-color: rgba(235, 89, 110, .2);
-    color           : rgba(255, 0, 0, .6);
-    border-radius   : 1px solid rgba(235, 89, 110, .2);
+    background-color: rgba(235, 89, 110, 0.2);
+    color           : rgba(255, 0, 0, 0.6);
+    border-radius   : 1px solid rgba(235, 89, 110, 0.2);
 }
 
 .message__success {
@@ -436,7 +436,7 @@ header {
     }
 
     50% {
-        opacity: .5;
+        opacity: 0.5;
     }
 
     100% {
@@ -451,7 +451,7 @@ header {
     }
 
     50% {
-        opacity: .5;
+        opacity: 0.5;
     }
 
     100% {
@@ -467,9 +467,8 @@ table {
 
 th,
 td {
-
     padding      : 1em 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 th {
@@ -546,11 +545,11 @@ tbody>tr>td:nth-child(3)>.btn.success::after {
     border-radius  : 50%;
     right          : -8px;
     top            : -24%;
-    color          : rgba(0, 0, 0, .7);
-    background     : rgba(254, 179, 43, .7);
+    color          : rgba(0, 0, 0, 0.7);
+    background     : rgba(254, 179, 43, 0.7);
 }
 
-@media(max-width:640px) {
+@media (max-width: 640px) {
     thead {
         display: none;
     }
@@ -587,7 +586,7 @@ tbody>tr>td:nth-child(3)>.btn.success::after {
     display      : block;
     margin       : 1em auto;
     width        : 50%;
-    border       : 1px solid rgba(0, 0, 0, .2);
+    border       : 1px solid rgba(0, 0, 0, 0.2);
     padding      : 1em;
     border-radius: 3px;
     box-shadow   : 0 2px 4px #d8e1e8;
@@ -701,7 +700,7 @@ textarea {
 .form__radio>span {
     display       : inline-block;
     font-weight   : 600;
-    font-family   : 'Inter', sans-serif;
+    font-family   : "Inter", sans-serif;
     margin-right  : auto;
     margin-top    : 1em;
     text-transform: uppercase;
@@ -731,8 +730,8 @@ textarea {
     right             : 0;
     bottom            : 0;
     background-color  : #ccc;
-    -webkit-transition: .4s;
-    transition        : .4s;
+    -webkit-transition: 0.4s;
+    transition        : 0.4s;
 }
 
 .slider:before {
@@ -743,8 +742,8 @@ textarea {
     left              : 4px;
     bottom            : 4px;
     background-color  : white;
-    -webkit-transition: .4s;
-    transition        : .4s;
+    -webkit-transition: 0.4s;
+    transition        : 0.4s;
 }
 
 input:checked+.slider {
@@ -805,20 +804,20 @@ input:checked+.slider:before {
 }
 
 .form_errors span {
-    color   : rgba(255, 0, 0, .6);
-    margin  : .5em 0;
+    color   : rgba(255, 0, 0, 0.6);
+    margin  : 0.5em 0;
     position: relative;
 }
 
 .form_errors span::before {
-    content       : '';
+    content       : "";
     display       : inline-block;
     width         : 5px;
     height        : 5px;
-    background    : rgba(255, 0, 0, .6);
+    background    : rgba(255, 0, 0, 0.6);
     border-radius : 50%;
     font-size     : 3rem;
-    margin        : 0 .5rem;
+    margin        : 0 0.5rem;
     vertical-align: middle;
     top           : 2px;
 }
@@ -827,7 +826,7 @@ input:checked+.slider:before {
 
 footer {
     min-height: 150px;
-    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
     display   : block;
     background: #171933;
     /* margin : 0 auto; */
@@ -888,7 +887,7 @@ footer .row {
     font-weight: 900;
 }
 
-@media(max-width: 576px) {
+@media (max-width: 576px) {
     .form__group {
         flex-direction: column;
     }
