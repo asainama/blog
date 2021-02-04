@@ -1,7 +1,6 @@
 @font-face {
     font-family: "Inter Semi";
-    src: url("../fonts/Inter/Inter-SemiBold.eot");
-    src: url("../fonts/Inter/Inter-SemiBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Inter/Inter-SemiBold.woff2") format("woff2"), url("../fonts/Inter/Inter-SemiBold.woff") format("woff"), url("../fonts/Inter/Inter-SemiBold.svg#Inter-SemiBold") format("svg");
+    src: url("../fonts/Inter/Inter-SemiBold.eot"), url("../fonts/Inter/Inter-SemiBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Inter/Inter-SemiBold.woff2") format("woff2"), url("../fonts/Inter/Inter-SemiBold.woff") format("woff"), url("../fonts/Inter/Inter-SemiBold.svg#Inter-SemiBold") format("svg");
     font-weight: 600;
     font-style: normal;
     font-display: swap;

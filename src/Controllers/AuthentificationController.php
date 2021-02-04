@@ -74,7 +74,8 @@ class AuthentificationController extends AbstractController
     }
     public function code(Router $router)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : null;
+        if ($method === 'POST') {
             SessionHelper::sessionStart();
             $obj = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             $userArray = json_decode($obj, true);
