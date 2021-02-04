@@ -14,7 +14,7 @@ class Auth
             throw new AccessDeniedException("Accès non autorisé", 403);
         }
     }
-    
+
     public static function isAdmin()
     {
         SessionHelper::sessionStart();
