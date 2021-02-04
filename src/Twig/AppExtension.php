@@ -65,9 +65,9 @@ class AppExtension extends AbstractExtension
 
     public function showError($errors): ?string
     {
-        $content = "<div class='form_errors'>";
+        $content = "<div class='form__errors'>";
         foreach ($errors as $e) {
-            $content .= "<span>$e</span>";
+            $content .= "<span class='form__errors__error'>$e</span>";
         }
         return $content .= "</div>";
     }

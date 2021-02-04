@@ -4,13 +4,13 @@
 <div class="row">
     <div class="post">
         <div class="post__header">
-            <h1>Gestions des <span>commentaires</span></h1>
+            <h1>Gestions des <span class="header__title">commentaires</span></h1>
         </div>
         <form action="" class="comment__form" method="POST">
             {% for comment in comments %}
                 <div class="comment">
                     <h5>{{comment.getUsername()}}</h5>
-                    <span>{{comment.getCreatedAt()}}</span>
+                    <span class="comment__date">{{comment.getCreatedAt()}}</span>
                     <p>{{comment.getContent()}}</p>
                 </div>
                 <div class="form__group">

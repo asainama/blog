@@ -41,7 +41,7 @@
     {% set code = isCheck("code") == 1 %}
     <div class="login">
         <div class="login__header">
-            <h1>Se <span>connecter</span></h1>
+            <h1>Se <span class="header__title">connecter</span></h1>
         </div>
         <form action="{{(code == 1) ? router.generate('code', {}, 'POST') : router.generate('login')}}" class="post__form" method="POST">
             {% include '/authentification/form.html.twig' %}
