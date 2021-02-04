@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Inter Semi";
-  src: url("../fonts/Inter/Inter-SemiBold.eot"),
+  src:
+    url("../fonts/Inter/Inter-SemiBold.eot"),
     url("../fonts/Inter/Inter-SemiBold.eot?#iefix") format("embedded-opentype"),
     url("../fonts/Inter/Inter-SemiBold.woff2") format("woff2"),
     url("../fonts/Inter/Inter-SemiBold.woff") format("woff"),
@@ -12,8 +13,9 @@
 
 @font-face {
   font-family: "Inter Semi";
-  src: url("../fonts/Inter/Inter-SemiBoldItalic.eot");
-  src: url("../fonts/Inter/Inter-SemiBoldItalic.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-SemiBoldItalic.eot")
+    url("../fonts/Inter/Inter-SemiBoldItalic.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-SemiBoldItalic.woff2") format("woff2"),
     url("../fonts/Inter/Inter-SemiBoldItalic.woff") format("woff"),
@@ -26,8 +28,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-Black.eot");
-  src: url("../fonts/Inter/Inter-Black.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("../fonts/Inter/Inter-Black.eot")
+    url("../fonts/Inter/Inter-Black.eot?#iefix") format("embedded-opentype"),
     url("../fonts/Inter/Inter-Black.woff2") format("woff2"),
     url("../fonts/Inter/Inter-Black.woff") format("woff"),
     url("../fonts/Inter/Inter-Black.svg#Inter-Black") format("svg");
@@ -38,8 +41,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-Italic.eot");
-  src: url("../fonts/Inter/Inter-Italic.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("../fonts/Inter/Inter-Italic.eot")
+    url("../fonts/Inter/Inter-Italic.eot?#iefix") format("embedded-opentype"),
     url("../fonts/Inter/Inter-Italic.woff2") format("woff2"),
     url("../fonts/Inter/Inter-Italic.woff") format("woff"),
     url("../fonts/Inter/Inter-Italic.svg#Inter-Italic") format("svg");
@@ -50,8 +54,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-MediumItalic.eot");
-  src: url("../fonts/Inter/Inter-MediumItalic.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-MediumItalic.eot")
+    url("../fonts/Inter/Inter-MediumItalic.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-MediumItalic.woff2") format("woff2"),
     url("../fonts/Inter/Inter-MediumItalic.woff") format("woff"),
@@ -64,8 +69,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-Bold.eot");
-  src: url("../fonts/Inter/Inter-Bold.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("../fonts/Inter/Inter-Bold.eot")
+    url("../fonts/Inter/Inter-Bold.eot?#iefix") format("embedded-opentype"),
     url("../fonts/Inter/Inter-Bold.woff2") format("woff2"),
     url("../fonts/Inter/Inter-Bold.woff") format("woff"),
     url("../fonts/Inter/Inter-Bold.svg#Inter-Bold") format("svg");
@@ -76,8 +82,9 @@
 
 @font-face {
   font-family: "Inter UI";
-  src: url("../fonts/Inter/InterUI-BlackItalic.eot");
-  src: url("../fonts/Inter/InterUI-BlackItalic.eot?#iefix")
+  src:
+    url("../fonts/Inter/InterUI-BlackItalic.eot")
+    url("../fonts/Inter/InterUI-BlackItalic.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/InterUI-BlackItalic.woff2") format("woff2"),
     url("../fonts/Inter/InterUI-BlackItalic.woff") format("woff"),
@@ -90,8 +97,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-Medium.eot");
-  src: url("../fonts/Inter/Inter-Medium.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("../fonts/Inter/Inter-Medium.eot")
+    url("../fonts/Inter/Inter-Medium.eot?#iefix") format("embedded-opentype"),
     url("../fonts/Inter/Inter-Medium.woff2") format("woff2"),
     url("../fonts/Inter/Inter-Medium.woff") format("woff"),
     url("../fonts/Inter/Inter-Medium.svg#Inter-Medium") format("svg");
@@ -102,8 +110,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-Regular.eot");
-  src: url("../fonts/Inter/Inter-Regular.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-Regular.eot")
+    url("../fonts/Inter/Inter-Regular.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-Regular.woff2") format("woff2"),
     url("../fonts/Inter/Inter-Regular.woff") format("woff"),
@@ -115,8 +124,9 @@
 
 @font-face {
   font-family: "Inter Extra";
-  src: url("../fonts/Inter/Inter-ExtraBold.eot");
-  src: url("../fonts/Inter/Inter-ExtraBold.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-ExtraBold.eot")
+    url("../fonts/Inter/Inter-ExtraBold.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-ExtraBold.woff2") format("woff2"),
     url("../fonts/Inter/Inter-ExtraBold.woff") format("woff"),
@@ -128,8 +138,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/Inter/Inter-BoldItalic.eot");
-  src: url("../fonts/Inter/Inter-BoldItalic.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-BoldItalic.eot")
+    url("../fonts/Inter/Inter-BoldItalic.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-BoldItalic.woff2") format("woff2"),
     url("../fonts/Inter/Inter-BoldItalic.woff") format("woff"),
@@ -141,8 +152,9 @@
 
 @font-face {
   font-family: "Inter Extra";
-  src: url("../fonts/Inter/Inter-ExtraBoldItalic.eot");
-  src: url("../fonts/Inter/Inter-ExtraBoldItalic.eot?#iefix")
+  src:
+    url("../fonts/Inter/Inter-ExtraBoldItalic.eot")
+    url("../fonts/Inter/Inter-ExtraBoldItalic.eot?#iefix")
     format("embedded-opentype"),
     url("../fonts/Inter/Inter-ExtraBoldItalic.woff2") format("woff2"),
     url("../fonts/Inter/Inter-ExtraBoldItalic.woff") format("woff"),

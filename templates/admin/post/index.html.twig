@@ -44,12 +44,12 @@
             {% for post in posts %}
             <tr>
                 <td class="table__title" data-label="ID">
-                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}" class="table__title_action">
                         #{{post.getId()}}
                     </a>
                 </td>
                 <td class="table__title" data-label="Titre">
-                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}"class="table__title_action">
                         {{post.getTitle()}}
                     </a>
                 </td>
@@ -59,7 +59,7 @@
                     </a>
                 </td>
                 <td class="table__actions" data-label="Actions">
-                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}" class="btn primary">
+                    <a href="{{router.generate('admin_post_edit',{'id': post.getId()})}}" class="btn primary table__actions_action">
                         Editer
                     </a>
                     <form action="{{router.generate('admin_post_delete',{'id': post.getId()},'POST')}}" method="POST" onsubmit="return confirm('Voulez vous vraiment effectuer cette action ?')">

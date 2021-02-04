@@ -64,7 +64,7 @@ class Router
                 }
             }
         } else {
-            call_user_func([new \App\Controllers\Error404Controller(), "index"], $this);
+            print_r(call_user_func([new \App\Controllers\Error404Controller(), "index"], $this));
         }
     }
 

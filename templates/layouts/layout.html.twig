@@ -44,8 +44,8 @@
     </div>
     <footer>
         <div class="row">
-            <div class="footer__logo">
-                <span>Me contacter</span>
+            <div class="footer footer__logo">
+                <span class="footer__logo__title">Me contacter</span>
                 <p>
                     J'ai appris à créer des sites Web par moi-même.
                     Je sais à quel point c'est amusant et gratifiant,
@@ -54,18 +54,18 @@
                     aussi simple et amusant que possible.
                 </p>
             </div>
-            <div class="footer__uselinks">
+            <div class="footer footer__uselinks">
                 <ul>
-                    <li><a href="{{router.generate('index')}}">Accueil</a><li/>
-                    <li><a href="{{router.generate('blog')}}">Blog</a></li>
-                    <li><a href="{{router.generate('contact')}}">Contact</a></li>
+                    <li><a class="footer__uselinks__a" href="{{router.generate('index')}}">Accueil</a><li/>
+                    <li><a class="footer__uselinks__a" href="{{router.generate('blog')}}">Blog</a></li>
+                    <li><a class="footer__uselinks__a" href="{{router.generate('contact')}}">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer__socials">
+            <div class="footer footer__socials">
                 <ul>
-                    <li><a href="#">Dribbble</a><li/>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Github</a></li>
+                    <li class="footer__socials__item"><a href="#" class="footer__socials__a">Dribbble</a><li/>
+                    <li class="footer__socials__item"><a href="#" class="footer__socials__a">Twitter</a></li>
+                    <li class="footer__socials__item"><a href="#" class="footer__socials__a">Github</a></li>
                 </ul>
             </div>
         </div>

@@ -21,7 +21,7 @@
     {% for comment in comments %}
         <div class="comment">
             <h5>{{comment.username}}</h5>
-            <span>{{comment.getCreatedAt()}}</span>
+            <span class="comment__date">{{comment.getCreatedAt()}}</span>
             <p>{{comment.getContent()}}</p>
         </div>
         {# {{comment.getId()}} #}
