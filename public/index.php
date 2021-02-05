@@ -1,18 +1,19 @@
 <?php
 
+use App\Config\DotEnv;
 use App\Router\Router;
 
-require '../vendor/autoload.php';
 define('DEBUG_TIME', microtime(true));
 define('VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . "templates");
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
-$dotenv = \Dotenv\Dotenv::createImmutable(ROOT);
-$dotenv->load();
+require '../vendor/autoload.php';
+(new DotEnv(ROOT . '.env'))->load();
 // Désactiver en prod
-$whoops = new \Whoops\Run();
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-$whoops->register();
-
+if (getenv('APP_ENV') === 'dev') {
+    $whoops = new \Whoops\Run();
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+    $whoops->register();
+}
 if (isset($_GET['page']) && $_GET['page'] === '1') {
     $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
     $get = $_GET;

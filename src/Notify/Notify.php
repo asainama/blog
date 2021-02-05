@@ -38,8 +38,8 @@ class Notify implements SplObserver
             $user = $query->fetch()['username'];
         }
         $message = (new \Swift_Message("Commentaire: Demande de validation du commentaire id " . $comment->getId()))
-        ->setFrom([$_ENV['MAILER_USER'] => 'Blog commentaire en attente'])
-        ->setTo([$_ENV['MAILER_USER']])
+        ->setFrom([getenv('MAILER_USER') => 'Blog commentaire en attente'])
+        ->setTo([getenv('MAILER_USER')])
         ->setBody(
             "Le contenu du commentaire : " . $comment->getContent() . "\n"
             . "posté par l'utilisateur : " . $user . "\n"

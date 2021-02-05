@@ -28,16 +28,16 @@ class Mailer
     {
         $this->dotenv = \Dotenv\Dotenv::createImmutable(ROOT);
         $this->dotenv->load();
-        $transport = (new \Swift_SmtpTransport($_ENV['MAILER_TRANSPORT'], $_ENV['MAILER_PORT'], $_ENV['MAILER_PROTOCOLE']))
-        ->setUsername($_ENV['MAILER_USER'])
-        ->setPassword($_ENV['MAILER_PASS']);
+        $transport = (new \Swift_SmtpTransport(getenv('MAILER_TRANSPORT'), getenv('MAILER_PORT'), getenv('MAILER_PROTOCOLE')))
+        ->setUsername(getenv('MAILER_USER'))
+        ->setPassword(getenv('MAILER_PASS'));
         $this->mailer = new Swift_Mailer($transport);
     }
 
     public function sendMessageSubscribe(User $user): bool
     {
         $message = (new \Swift_Message('Contact: Message de contact'))
-        ->setFrom([$_ENV['MAILER_USER'] => 'Sylvain Ainama'])
+        ->setFrom([getenv('MAILER_USER') => 'Sylvain Ainama'])
         ->setTo([$user->getEmail() => $user->getUsername()])
         ->setBody(
             "Votre code de validation est : " . $user->getCode()
@@ -54,7 +54,7 @@ class Mailer
     public function sendMessageContact(Contact $contact, Router $router)
     {
         $message = (new \Swift_Message('Contact: Message de contact'))
-        ->setFrom([$_ENV['MAILER_USER'] => 'Sylvain Ainama'])
+        ->setFrom([getenv('MAILER_USER') => 'Sylvain Ainama'])
         ->setTo([$contact->getEmail() => $contact->getFirstname() . ' ' . $contact->getLastname()])
         ->setBody($contact->getMessage());
         try {

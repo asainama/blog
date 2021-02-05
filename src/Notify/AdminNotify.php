@@ -88,7 +88,7 @@ class AdminNotify implements SplObserver
         $message = null;
         if ($type === 2) {
             $message = (new \Swift_Message("Commentaire refusé"))
-            ->setFrom([$_ENV['MAILER_USER']])
+            ->setFrom([getenv('MAILER_USER')])
             ->setTo($user['email'])
             ->setBody(
                 "Le contenu du commentaire : " . $comment['content'] . "\n"
@@ -97,7 +97,7 @@ class AdminNotify implements SplObserver
             );
         } elseif ($type === 1) {
             $message = (new \Swift_Message("Commentaire accepté"))
-            ->setFrom([$_ENV['MAILER_USER']])
+            ->setFrom([getenv('MAILER_USER')])
             ->setTo($user['email'])
             ->setBody(
                 "Le contenu du commentaire : " . $comment['content'] . "\n"
