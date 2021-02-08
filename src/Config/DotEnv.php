@@ -19,6 +19,11 @@ class DotEnv
         $this->path = $path;
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @return void
+     */
     public function load(): void
     {
         if (!is_readable($this->path)) {

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Helpers\CSRF;
+use App\Helpers\GlobalHelper;
 use App\Model\Contact;
 use App\Router\Router;
 use App\Helpers\Mailer;
@@ -12,19 +13,19 @@ class ContactController extends AbstractController
 {
     /**
      * Show index page
-     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router The route object
      * @return void
      */
     public function index(Router $router)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            CSRF::verifToken($_POST['token'], $router, 'contact');
+        if (GlobalHelper::method() === 'POST') {
+            CSRF::verifToken(GlobalHelper::post('token'), $router, 'contact');
             $contact = (new Contact())
-                ->setFirstname($_POST['firstname'])
-                ->setLastname($_POST['lastname'])
-                ->setEmail($_POST['email'])
-                ->setMessage($_POST['message']);
+                ->setFirstname(GlobalHelper::post('firstname'))
+                ->setLastname(GlobalHelper::post('lastname'))
+                ->setEmail(GlobalHelper::post('email'))
+                ->setMessage(GlobalHelper::post('message'));
             $data = $contact->getArrayFromObject();
             $contactValidator = new ContactValidator($data);
             $contactValidator->isValid();
@@ -38,11 +39,11 @@ class ContactController extends AbstractController
                     'router' => $router
                     ]
                 );
-            } else {
+            } elseif (empty($errors)) {
                 $mailer = new Mailer();
                 $mailer->sendMessageContact($contact, $router);
             }
-        } else {
+        } elseif (GlobalHelper::method() === 'GET') {
             return $this->twig->render(
                 '/contact/contact.html.twig',
                 [

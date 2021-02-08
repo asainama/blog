@@ -27,43 +27,15 @@ class AdminNotify implements SplObserver
 
     public function sendMessageDelete(array $delete)
     {
-        foreach ($delete as $k => $d) {
-            $query = (new QueryBuilder())
-                ->select()
-                ->from('Comment')
-                ->where('id = :id')
-                ->params(
-                    [
-                        'id' => $d
-                    ]
-                )
-                ->execute();
-            $query->setFetchMode(PDO::FETCH_CLASS, Comment::class);
-            if ($query !== false) {
-                $comment = $query->fetch();
-                $this->sendMessageComment($comment, 2);
-            }
+        foreach ($delete as $comment) {
+            $this->sendMessageComment($comment, 2);
         }
     }
 
     public function sendMessageUpdate(array $update)
     {
-        foreach ($update as $k => $u) {
-            $query = (new QueryBuilder())
-                ->select()
-                ->from('Comment')
-                ->where('id = :id')
-                ->params(
-                    [
-                        'id' => $u
-                    ]
-                )
-                ->execute();
-            $query->setFetchMode(PDO::FETCH_CLASS, Comment::class);
-            if ($query !== false) {
-                $comment = $query->fetch();
+        foreach ($update as $comment) {
                 $this->sendMessageComment($comment, 1);
-            }
         }
     }
 

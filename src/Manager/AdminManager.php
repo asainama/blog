@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 
+use PDO;
 use SplSubject;
 use SplObserver;
 use SplObjectStorage;
@@ -67,6 +68,7 @@ class AdminManager implements SplSubject
 
     private function updateComment($id)
     {
+        $comment = $this->getComment($id);
         $qb = new QueryBuilder();
         $query = $qb
                 ->update('Comment')
@@ -80,13 +82,34 @@ class AdminManager implements SplSubject
                 ->execute();
         if ($query === false) {
             $this->errors[$id] = array("Le commentaire $id n'a pas pu être mis à jour");
-        } else {
-            array_push($this->update, $id);
         }
+        if ($comment !== false) {
+            array_push($this->update, $comment);
+        }
+    }
+
+    private function getComment($id)
+    {
+        $query = (new QueryBuilder())
+                ->select()
+                ->from('Comment')
+                ->where('id = :id')
+                ->params(
+                    [
+                        'id' => $id
+                    ]
+                )
+                ->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, Comment::class);
+        if ($query !== false) {
+            return $query->fetch();
+        }
+        return false;
     }
 
     private function deleteComment($id)
     {
+        $comment = $this->getComment($id);
         $qb = new QueryBuilder();
         $query = $qb
                 ->delete()
@@ -100,8 +123,9 @@ class AdminManager implements SplSubject
                 ->execute();
         if ($query === false) {
             $this->errors[$id] = array("Le commentaire $id n'a pas pu être supprimé");
-        } else {
-            array_push($this->delete, $id);
+        }
+        if ($comment !== false) {
+            array_push($this->delete, $comment);
         }
     }
 

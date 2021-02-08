@@ -7,6 +7,23 @@
             <p>Vous êtes connecté</p>
         </div>
     {% endif %}
-        <h1>Accueil</h1>
+        <section id="information">
+            <div class="information_content">
+                <div class="information_content_description">
+                    <h2 class="information_content_title fromLeft">Aïnama <span class="header__title">Sylvain</span></h2>
+                    <p>Aïnama Sylvain, le développeur qu’il vous faut !</p>
+                </div>
+                <img src="{{assets("logo.jpg",{"type":"img"})}}" alt="photo_profil">
+            </div>
+        </section>
+        <section id="contact">
+            <div class="contact_content">
+                <h2 class="fromLeft">Me <span class="header__title">contacter</span></h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, omnis delectus doloribus nobis ex ea ipsa accusantium dolorum quisquam? Cumque minus vitae error sint ratione! Autem, suscipit? Provident, totam dolorem.</p>
+                <div class="contact_content_action">
+                    <a href="{{router.generate('contact')}}" class="btn primary">Contacter moi</a>
+                </div>
+            </div>
+        </section>
     </div>
 {% endblock %}

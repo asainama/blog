@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\GlobalHelper;
 use PDO;
 use DateTime;
 use Exception;
@@ -16,6 +17,12 @@ use App\Validator\PostValidator;
 
 class AdminController extends AbstractController
 {
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param Router $router
+     * @return void
+     */
     public function postindex(Router $router)
     {
         $currentPage = Url::getPositiveInt('page', 1);
@@ -59,14 +66,21 @@ class AdminController extends AbstractController
         // form button post
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param Router $router
+     * @param array $params
+     * @return void
+     */
     public function postEdit(Router $router, array $params)
     {
         $id = $params['id'];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (GlobalHelper::method() === 'POST') {
             /** @var Post|null */
             $post = $this->initPost($id);
             $this->validatePost($post, $router, 'admin/post/edit.html.twig', 'update', 2);
-        } else {
+        } elseif (GlobalHelper::method() === 'GET') {
             $query = (new QueryBuilder())
                     ->select()
                     ->from('Post')
@@ -85,9 +99,15 @@ class AdminController extends AbstractController
         }
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param Router $router
+     * @return void
+     */
     public function postNew(Router $router)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (GlobalHelper::method() === 'POST') {
             $post = $this->initPost();
             $this->validatePost($post, $router, 'admin/post/new.html.twig', 'created', 1);
         }
@@ -116,21 +136,29 @@ class AdminController extends AbstractController
         }
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @param Router $router
+     * @param array $params
+     * @return void
+     */
     public function postComments(Router $router, array $params)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (GlobalHelper::method() === 'POST') {
             $notify = new AdminNotify();
             $commentManager = new AdminManager();
             $commentManager->attach($notify);
-            $errors = $commentManager->updateOrDeleteComment($_POST);
+            $errors = $commentManager->updateOrDeleteComment(GlobalHelper::allPost());
             if (empty($errors)) {
                 http_response_code(302);
                 header('Location: ' . $router->generate('admin_posts') . '?commentValidate=1');
-                exit();
-            } else {
+                die;
+            } elseif (!empty($errors)) {
                 http_response_code(302);
                 header('Location: ' . $router->generate('admin_posts') . '?commentValidate=0');
-                exit();
+                die;
             }
         }
         if (array_key_exists('id', $params)) {
@@ -150,8 +178,8 @@ class AdminController extends AbstractController
             if ($query === false) {
                 http_response_code(302);
                 header('Location: ' . $router->generate('admin_posts') . '?comments=0');
-                exit();
-            } else {
+                die;
+            } elseif ($query !== false) {
                 $comments = $query->fetchAll(PDO::FETCH_CLASS, Comment::class);
                 return $this->twig->render(
                     '/admin/post/comments.html.twig',
@@ -164,16 +192,22 @@ class AdminController extends AbstractController
         }
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param string $id
+     * @return Post|null
+     */
     private function initPost(string $id = null): ?Post
     {
         $date = new DateTime();
         $post = new Post();
         $post->setId($id);
-        $post->setTitle($_POST['title']);
+        $post->setTitle(GlobalHelper::post('title'));
         $post->setSlug($post->titleToSlug());
-        $post->setDraft(isset($_POST['draft']) ? true : false);
-        $post->setChapo($_POST['chapo']);
-        $post->setContent($_POST['content']);
+        $post->setDraft(GlobalHelper::post('draft') ? true : false);
+        $post->setChapo(GlobalHelper::post('chapo'));
+        $post->setContent(GlobalHelper::post('content'));
         $post->setCreatedAt($date);
         return $post;
     }
@@ -219,11 +253,11 @@ class AdminController extends AbstractController
                     'router' => $router
                     ]
             );
-        } else {
+        } elseif ($postValidator->error() === false) {
             $query = ($type === 1) ? $this->insertPost($post) : $this->updatePost($post);
             if ($query === false) {
                 header('Location: ' . $router->generate('admin_posts') . "?$field=0");
-            } else {
+            } elseif ($query !== false) {
                 header('Location: ' . $router->generate('admin_posts') . "?$field=1");
             }
         }
@@ -232,10 +266,12 @@ class AdminController extends AbstractController
     private function insertPost(Post $post)
     {
         $post->setUserId(1);
-        $keys =  array_keys($post->getArrayFromObject());
+        $posts = $post->getArrayFromObject();
+        array_pop($posts);
+        $keys =  array_keys($posts);
         array_shift($keys);
         $keys = implode(",", $keys);
-        $values =  array_values($post->getArrayFromObject());
+        $values =  array_values($posts);
         array_shift($values);
         $values = implode("§", $values);
         return (new QueryBuilder())

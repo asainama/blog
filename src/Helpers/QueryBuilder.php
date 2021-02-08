@@ -36,6 +36,10 @@ class QueryBuilder
 
     private $columns = [];
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function __construct()
     {
         $this->pdo = Database::connect();

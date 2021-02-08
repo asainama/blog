@@ -26,8 +26,6 @@ class Mailer
      */
     public function __construct()
     {
-        $this->dotenv = \Dotenv\Dotenv::createImmutable(ROOT);
-        $this->dotenv->load();
         $transport = (new \Swift_SmtpTransport(getenv('MAILER_TRANSPORT'), getenv('MAILER_PORT'), getenv('MAILER_PROTOCOLE')))
         ->setUsername(getenv('MAILER_USER'))
         ->setPassword(getenv('MAILER_PASS'));
@@ -51,6 +49,13 @@ class Mailer
         }
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @param Contact $contact
+     * @param Router $router
+     * @return void
+     */
     public function sendMessageContact(Contact $contact, Router $router)
     {
         $message = (new \Swift_Message('Contact: Message de contact'))
@@ -60,10 +65,10 @@ class Mailer
         try {
             $this->mailer->send($message);
             header('Location: ' . $router->generate('contact') . '?mailervalidate=1');
-            exit();
+            die;
         } catch (\Swift_TransportException $e) {
             header('Location: ' . $router->generate('contact') . '?mailertransport=1');
-            exit();
+            die;
         }
     }
 
@@ -72,7 +77,6 @@ class Mailer
         try {
             $this->mailer->send($message);
         } catch (\Swift_TransportException $e) {
-            dd($e->getMessage());
             return false;
         }
         return true;

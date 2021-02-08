@@ -9,64 +9,64 @@ abstract class AbstractValidator
     protected function validate($src, $rules = [])
     {
         if ($src !== null) {
-            foreach ($src as $item => $item_value) {
+            foreach ($src as $item => $itemValue) {
                 if (key_exists($item, $rules)) {
-                    foreach ($rules[$item] as $rule => $rule_value) {
+                    foreach ($rules[$item] as $rule => $ruleValue) {
                         if (is_int($rule)) {
-                            $rule = $rule_value;
+                            $rule = $ruleValue;
                         }
                         switch ($rule) {
                             case 'required':
-                                if (empty($item_value) && $rule_value) {
+                                if (empty($itemValue) && $ruleValue) {
                                     $this->addError($item, ucwords($item) . ' est requis');
                                 }
                                 break;
 
                             case 'minLen':
-                                if (strlen($item_value) < $rule_value) {
+                                if (strlen($itemValue) < $ruleValue) {
                                     $this->addError($item, ucwords($item)
                                     . ' devrait posséder une taille de '
-                                    . $rule_value
+                                    . $ruleValue
                                     . ' caractères au minimum');
                                 }
                                 break;
     
                             case 'maxLen':
-                                if (strlen($item_value) > $rule_value) {
+                                if (strlen($itemValue) > $ruleValue) {
                                     $this->addError($item, ucwords($item)
                                     . ' devrait posséder une taille de'
-                                    . $rule_value
+                                    . $ruleValue
                                     . ' caractères au maximum');
                                 }
                                 break;
     
                             case 'numeric':
-                                if (!ctype_digit($item_value) && $rule_value) {
+                                if (!ctype_digit($itemValue) && $ruleValue) {
                                     $this->addError($item, ucwords($item)
                                     . ' devrait être un numérique');
                                 }
                                 break;
                             case 'alpha':
-                                if (!ctype_alpha($item_value) && $rule_value) {
+                                if (!ctype_alpha($itemValue) && $ruleValue) {
                                     $this->addError($item, ucwords($item)
                                     . ' doit être des caractères alphabétiques');
                                 }
                                 break;
                             case 'email':
-                                if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $item_value)) {
+                                if (filter_var($itemValue, FILTER_VALIDATE_EMAIL) === false) {
                                     $this->addError($item, ucwords($item)
                                     . ' n\'est pas un email valide');
                                 }
                                 break;
                             case 'date':
-                                if (!$this->validateDate($item_value)) {
+                                if (!$this->validateDate($itemValue)) {
                                     $this->addError($item, ucwords($item)
                                     . ' n\'est pas une date valide');
                                 }
                                 break;
                             case 'bool':
-                                $item_value = boolval($item_value);
-                                if (!is_bool($item_value)) {
+                                $itemValue = boolval($itemValue);
+                                if (!filter_var($itemValue, FILTER_VALIDATE_BOOLEAN)) {
                                     $this->addError($item, ucwords($item)
                                     . ' n\'est pas une valeur booléenne valide');
                                 }
@@ -82,8 +82,14 @@ abstract class AbstractValidator
     {
         $this->errors[$item][] = "Le champs " . $error;
     }
-
-    private function validateDate($date, $format = 'Y-m-d H:i:s')
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param [type] $date
+     * @param string $format
+     * @return void
+     */
+    private function validateDate(string $date, $format = 'Y-m-d H:i:s')
     {
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;

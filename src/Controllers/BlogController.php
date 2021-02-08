@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\GlobalHelper;
 use PDO;
 use DateTime;
 use Exception;
@@ -25,7 +26,7 @@ class BlogController extends AbstractController
      */
     public function index(Router $router)
     {
-        $currentPage = Url::getPositiveInt('page', 1);
+        $currentPage = (new Url())->getPositiveInt('page', 1);
         /** @var QueryBuilder */
         $count = (new QueryBuilder())->from("Post")->count();
         $pages = ceil($count / 12);
@@ -56,7 +57,9 @@ class BlogController extends AbstractController
     }
     /**
      * Show (show) page
-     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.ExitExpression)
      * @param Router $router The route object
      * @return void
      */
@@ -90,7 +93,7 @@ class BlogController extends AbstractController
                 http_response_code(302);
                 header('Location: ', $url);
             }
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (GlobalHelper::method() === 'POST') {
                 SessionHelper::sessionStart();
                 $id = json_decode($_SESSION['auth'], true)['id'];
                 $comment = new Comment();
@@ -114,36 +117,34 @@ class BlogController extends AbstractController
                             'comment' => $comment
                         ]
                     );
-                } else {
-                    $notify = new Notify();
-                    $commentManager = new CommentManager();
-                    $commentManager->attach($notify);
-                    $query = $commentManager->insertComment($comment);
-                    if ($query === false) {
-                        return $this->twig->render(
-                            '/post/show.html.twig',
-                            [
-                                'post' => $post,
-                                'comments' => $comments,
-                                'isValid' => false,
-                                'router' => $router
-                            ]
-                        );
-                    } else {
-                        // TODO: Email de demande de Validation
-                        // Oberserver Pattern
-                        return $this->twig->render(
-                            '/post/show.html.twig',
-                            [
-                                'post' => $post,
-                                'comments' => $comments,
-                                'isValid' => true,
-                                'router' => $router
-                            ]
-                        );
-                    }
                 }
-            } else {
+                $notify = new Notify();
+                $commentManager = new CommentManager();
+                $commentManager->attach($notify);
+                $query = $commentManager->insertComment($comment);
+                if ($query === false) {
+                    return $this->twig->render(
+                        '/post/show.html.twig',
+                        [
+                            'post' => $post,
+                            'comments' => $comments,
+                            'isValid' => false,
+                            'router' => $router
+                        ]
+                    );
+                }
+                // TODO: Email de demande de Validation
+                // Oberserver Pattern
+                return $this->twig->render(
+                    '/post/show.html.twig',
+                    [
+                        'post' => $post,
+                        'comments' => $comments,
+                        'isValid' => true,
+                        'router' => $router
+                    ]
+                );
+            } elseif (GlobalHelper::method() === 'GET') {
                 return $this->twig->render(
                     '/post/show.html.twig',
                     [
@@ -169,8 +170,7 @@ class BlogController extends AbstractController
         $comments = $query->fetchAll(\PDO::FETCH_CLASS, Comment::class);
         if ($query === false) {
             return null;
-        } else {
-            return $comments;
         }
+        return $comments;
     }
 }
