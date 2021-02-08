@@ -6,6 +6,12 @@ use App\Router\Router;
 
 class CSRF
 {
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @return string|null
+     */
     public static function createToken(): ?string
     {
         $token = md5(time());
@@ -16,6 +22,16 @@ class CSRF
 HTML;
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @param string|null $token
+     * @param Router $router
+     * @param string $name
+     * @return boolean
+     */
     public static function verifToken(?string $token = null, Router $router, string $name): bool
     {
         SessionHelper::sessionStart();
@@ -25,6 +41,6 @@ HTML;
         unset($_SESSION['token']);
         http_response_code(302);
         header('Location: ' . $router->generate($name) . '?accesstoken=1');
-        die();
+        die;
     }
 }

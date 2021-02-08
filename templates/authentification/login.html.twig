@@ -2,6 +2,12 @@
 {% block title %} Se connecter {% endblock %}
 {% block content %}
 <div class="row">
+    {% set code = isCheck("code") == 1 %}
+    {% if code == 2 %}
+        <div class="message message__error">
+            <p>Le code est incorrect</p>
+        </div>
+    {% endif %}
     {% if isCheck("denied") == 1 %}
         <div class="message message__error">
             <p>Vous ne pouvez pas accéder par cette page</p>
@@ -38,7 +44,6 @@
             <p>Vous êtes déjà déconnecter</p>
         </div>
     {% endif %} #}
-    {% set code = isCheck("code") == 1 %}
     <div class="login">
         <div class="login__header">
             <h1>Se <span class="header__title">connecter</span></h1>

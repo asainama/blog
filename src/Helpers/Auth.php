@@ -4,9 +4,16 @@ namespace App\Helpers;
 
 use App\Router\Router;
 use App\Exception\AccessDeniedException;
+use SessionHandlerInterface;
 
 class Auth
 {
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @return boolean
+     */
     public static function isConnect()
     {
         SessionHelper::sessionStart();
@@ -15,6 +22,13 @@ class Auth
         }
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @return boolean
+     */
     public static function isAdmin()
     {
         SessionHelper::sessionStart();
@@ -25,15 +39,24 @@ class Auth
             }
             return false;
         }
+        return false;
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.Superglobals)
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @param Router $router
+     * @return void
+     */
     public static function disconnect(Router $router)
     {
         try {
             self::isConnect();
         } catch (AccessDeniedException $e) {
             header('Location: ' . $router->generate('login') . '?denied=2');
-            exit();
+            die;
         }
         unset($_SESSION['auth']);
         header('Location: ' . $router->generate('login') . '?denied=0');

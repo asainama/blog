@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Helpers\Mailer;
 use App\Router\Router;
 
 class HomeController extends AbstractController

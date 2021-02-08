@@ -74,7 +74,7 @@ class User
     {
         if (empty($password)) {
             $this->password = null;
-        } else {
+        } elseif (!empty($password)) {
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         }
         return $this;

@@ -2,6 +2,8 @@
 
 namespace App\Router;
 
+use App\Helpers\GlobalHelper;
+
 class Router
 {
     private $url;
@@ -43,9 +45,14 @@ class Router
         return $this;
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return void
+     */
     public function run()
     {
-        $column = array_column($this->routes[$_SERVER['REQUEST_METHOD']], 'path');
+        $column = array_column($this->routes[GlobalHelper::method()], 'path');
         $url = $this->url;
         if (str_contains($url, '?')) {
             $this->query = explode("?", $url);
@@ -57,18 +64,26 @@ class Router
             return $ok === 1 ? $path : false;
         });
         if (!empty($validPath) || $url === "") {
-            foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            foreach ($this->routes[GlobalHelper::method()] as $route) {
                 $regex = $this->compileRoute($route->path);
                 if ($route->matches($this->url, $regex)) {
                     $route->execute($this);
                 }
             }
-        } else {
+        } elseif (empty($validPath)) {
             print_r(call_user_func([new \App\Controllers\Error404Controller(), "index"], $this));
         }
     }
 
-    public function generate(string $name, array $params = [], $action = 'GET')
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param string $name
+     * @param array $params
+     * @param string $action
+     * @return void
+     */
+    public function generate(string $name, array $params = [], $action = 'GET'): ?string
     {
         $route = $this->routes;
         $column = array_column($route[$action], 'name');
@@ -87,16 +102,17 @@ class Router
                 }
                 $route[$action][$key]->addParams($params);
             }
-            return "http://$_SERVER[HTTP_HOST]" . $path;
-        } else {
-            // throw new RuntimeException("Route '{$name}' does not exist.");
+            $host = GlobalHelper::serverMethod('HTTP_HOST');
+            return "http://$host" . $path;
         }
+        // TODO: Faire une header
+        // else {
+            // throw new RuntimeException("Route '{$name}' does not exist.");
+        // }
     }
 
     protected function compileRoute($path)
     {
-        // var_dump($route->path);
-        // $path = $route->path;
         if (preg_match_all('`(/|\.|)\[([^:\]]*+)(?::([^:\]]*+))?\](\?|)`', $path, $this->matches, PREG_SET_ORDER)) {
             $matchTypes = $this->matchTypes;
             foreach ($this->matches as $match) {
@@ -110,7 +126,6 @@ class Router
 
                 $optional = $optional !== '' ? '?' : null;
 
-                //Older versions of PCRE require the 'P' in (?P<named>)
                 $pattern = '(?:'
                         . ($pre !== '' ? $pre : null)
                         . '('

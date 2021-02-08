@@ -6,13 +6,6 @@ use PDO;
 
 class Database
 {
-    /**
-     * Dotenv Object
-     *
-     * @var Dotenv\Dotenv $_dotenv Object Dotenv
-     */
-    private $dotenv;
-
     /** @var PDO */
     private static $pdo;
 
@@ -30,7 +23,7 @@ class Database
      */
     public static function connect(): PDO
     {
-        if (is_null(self::$pdo)) {
+        if (self::$pdo === null) {
             try {
                 self::$pdo = new PDO(
                     "mysql:host=" . getenv('DB_HOST')
@@ -45,17 +38,5 @@ class Database
             }
         }
         return self::$pdo;
-        // try {
-        //     return new PDO(
-        //         "mysql:host=" . $_ENV['DB_HOST']
-        //         . ";port=" . $_ENV['DB_PORT']
-        //         . ";dbname=" . $_ENV['DB_NAME'],
-        //         $_ENV['DB_USER'],
-        //         $_ENV['DB_PASSWORD'],
-        //         [PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION]
-        //     );
-        // } catch (\PDOException $e) {
-        //     throw new \Exception($e->getMessage());
-        // }
     }
 }

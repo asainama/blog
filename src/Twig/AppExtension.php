@@ -9,6 +9,7 @@ use App\Helpers\Auth;
 use App\Helpers\CSRF;
 use App\Router\Router;
 use Twig\TwigFunction;
+use App\Helpers\GlobalHelper;
 use App\Helpers\QueryBuilder;
 use Twig\Extension\AbstractExtension;
 use App\Exception\AccessDeniedException;
@@ -58,6 +59,11 @@ class AppExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return string|null
+     */
     public function csrf(): ?string
     {
         return CSRF::createToken();
@@ -71,15 +77,27 @@ class AppExtension extends AbstractExtension
         }
         return $content .= "</div>";
     }
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param string $name
+     * @return boolean
+     */
     public function isCheck(string $name)
     {
-        if (isset($_GET[$name]) && $_GET[$name] === "1") {
+        $name = GlobalHelper::get($name);
+        if ($name === "1") {
             return 1;
-        } elseif (isset($_GET[$name]) && $_GET[$name] === "0") {
+        } elseif ($name === "0") {
             return 0;
         }
         return 2;
     }
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return boolean
+     */
     public function isConnect(): bool
     {
         try {
@@ -89,6 +107,11 @@ class AppExtension extends AbstractExtension
         }
         return true;
     }
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return boolean
+     */
     public function isAdmin(): bool
     {
         return Auth::isAdmin();
@@ -179,7 +202,11 @@ HTML;
         }
         return $this->getLink($link, 'Page précédente');
     }
-
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @return integer
+     */
     private function getCurrentPage(): int
     {
         return Url::getPositiveInt('page', 1);

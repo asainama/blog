@@ -53,7 +53,7 @@ class Route
         if (preg_match($regex, $path, $matches)) {
             if (empty($matches)) {
                 $this->setPath("/");
-            } else {
+            } elseif (!empty($matches)) {
                 $this->setPath("$matches[0]");
             }
         }
@@ -73,12 +73,20 @@ class Route
     {
         return $this->name;
     }
+    /**
+     * Undocumented function
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(PHPMD.ExitExpression)
+     * @param Router $router
+     * @return void
+     */
     public function execute(Router $router)
     {
         if (str_contains($this->getName(), 'admin')) {
             try {
                 \App\Helpers\Auth::isConnect();
-                if (!\App\Helpers\Auth::isAdmin()) {
+                $isAdmin = \App\Helpers\Auth::isAdmin();
+                if (!$isAdmin) {
                     header('Location: ' . $router->generate('login') . '?denied=1');
                     exit();
                 }
