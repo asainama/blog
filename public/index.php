@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\DotEnv;
+use App\Helpers\GlobalHelper;
 use App\Router\Router;
 
 define('DEBUG_TIME', microtime(true));
@@ -14,9 +15,9 @@ if (getenv('APP_ENV') === 'dev') {
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
     $whoops->register();
 }
-if (isset($_GET['page']) && $_GET['page'] === '1') {
-    $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
-    $get = $_GET;
+if (GlobalHelper::get('page') === '1') {
+    $uri = explode('?', GlobalHelper::serverMethod('RESQUEST_URI'))[0];
+    $get = GlobalHelper::allGet();
     unset($get['page']);
     $query = http_build_query($get);
     if (!empty($query)) {
@@ -24,10 +25,10 @@ if (isset($_GET['page']) && $_GET['page'] === '1') {
     }
     http_response_code(302);
     header('Location :' . $uri);
-    exit();
+    die;
 }
 
-$router = new Router($_SERVER['REQUEST_URI']);
+$router = new Router(GlobalHelper::serverMethod('RESQUEST_URI'));
 
 $router
     ->get('/', 'HomeController#index', 'index')
