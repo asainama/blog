@@ -88,11 +88,11 @@ class Route
                 $isAdmin = \App\Helpers\Auth::isAdmin();
                 if (!$isAdmin) {
                     header('Location: ' . $router->generate('login') . '?denied=1');
-                    exit();
+                    die;
                 }
             } catch (AccessDeniedException $e) {
                 header('Location: ' . $router->generate('login') . '?denied=1');
-                exit();
+                die;
             }
         }
         $actions = explode('#', $this->action);
