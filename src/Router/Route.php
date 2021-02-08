@@ -101,7 +101,7 @@ class Route
         if (class_exists($controller)) {
             $class = new ReflectionClass($controller);
             if ($class->hasMethod($method)) {
-                echo (call_user_func([new $controller(), $method], $router, $this->params));
+                print_r(call_user_func([new $controller(), $method], $router, $this->params));
             }
         }
     }

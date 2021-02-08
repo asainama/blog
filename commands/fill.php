@@ -51,7 +51,7 @@ for ($i = 0; $i < 50; $i++) {
             . ",chapo = '{$faker->text(255)}'"
         );
     } catch (\PDOException $e) {
-        echo $e->getMessage();
+        print_r($e->getMessage());
     }
 }
 // Comment

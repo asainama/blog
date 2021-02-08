@@ -28,4 +28,9 @@ abstract class GlobalHelper
     {
         return filter_input_array(INPUT_POST);
     }
+
+    public static function allGet(): ?array
+    {
+        return filter_input_array(INPUT_GET);
+    }
 }
