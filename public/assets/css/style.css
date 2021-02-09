@@ -439,7 +439,6 @@ header {
 }
 
 @keyframes slideLeft {
-
   0% {
     right: -600px;
   }
@@ -454,7 +453,6 @@ header {
   }
 }
 @keyframes hide {
-
   0% {
     opacity: 1;
   }
@@ -560,7 +558,6 @@ tbody > tr > td:nth-child(3) > .btn.success::after {
 }
 
 @media (max-width: 640px) {
-
   thead {
     display: none;
   }
@@ -982,7 +979,6 @@ footer .row {
 }
 
 @media (max-width: 476px) {
-
   .paginate__action {
     flex-direction: column-reverse;
     align-items: flex-end;
@@ -991,14 +987,12 @@ footer .row {
   .paginate__action .btn {
     margin: 1em 0;
   }
-
 }
 @media (max-width: 576px) {
-
   .information_content {
     flex-direction: column;
   }
-
+  
   .contact_content {
     align-items: center;
   }
@@ -1034,5 +1028,4 @@ footer .row {
   .information_content_description {
     padding-bottom: 2em;
   }
-
 }
