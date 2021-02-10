@@ -9,7 +9,7 @@ use SessionHandlerInterface;
 class Auth
 {
     /**
-     * Undocumented function
+     * Return true if session auth exists
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @return boolean
@@ -23,7 +23,7 @@ class Auth
     }
 
     /**
-     * Undocumented function
+     * Return true if session auth exists and role equals 1
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.ExitExpression)
@@ -43,7 +43,7 @@ class Auth
     }
 
     /**
-     * Undocumented function
+     * Disconnect auth
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.ExitExpression)

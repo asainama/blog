@@ -2,15 +2,17 @@
 
 namespace App\Controllers;
 
-use App\Helpers\GlobalHelper;
+use App\Config\Database;
 use PDO;
 use DateTime;
 use Exception;
 use App\Model\Post;
 use App\Helpers\Url;
+use App\Helpers\CSRF;
 use App\Model\Comment;
 use App\Router\Router;
 use App\Notify\AdminNotify;
+use App\Helpers\GlobalHelper;
 use App\Helpers\QueryBuilder;
 use App\Manager\AdminManager;
 use App\Validator\PostValidator;
@@ -18,7 +20,7 @@ use App\Validator\PostValidator;
 class AdminController extends AbstractController
 {
     /**
-     * Undocumented function
+     * Return Post index View
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @return void
@@ -67,7 +69,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Return Post View Edit
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @param array $params
@@ -77,6 +79,7 @@ class AdminController extends AbstractController
     {
         $id = $params['id'];
         if (GlobalHelper::method() === 'POST') {
+            CSRF::verifToken(GlobalHelper::post('token'), $router, 'admin_post_edit', $id);
             /** @var Post|null */
             $post = $this->initPost($id);
             $this->validatePost($post, $router, 'admin/post/edit.html.twig', 'update', 2);
@@ -100,7 +103,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Return Post New View
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @return void
@@ -108,6 +111,7 @@ class AdminController extends AbstractController
     public function postNew(Router $router)
     {
         if (GlobalHelper::method() === 'POST') {
+            CSRF::verifToken(GlobalHelper::post('token'), $router, 'admin_post_new');
             $post = $this->initPost();
             $this->validatePost($post, $router, 'admin/post/new.html.twig', 'created', 1);
         }
@@ -119,6 +123,13 @@ class AdminController extends AbstractController
         );
     }
 
+    /**
+     * Delete Post with id
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param Router $router
+     * @param array $params
+     * @return void
+     */
     public function postDelete(Router $router, array $params)
     {
         if (array_key_exists('id', $params)) {
@@ -137,7 +148,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Return post View Comments
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ExitExpression)
      * @param Router $router
@@ -147,6 +158,7 @@ class AdminController extends AbstractController
     public function postComments(Router $router, array $params)
     {
         if (GlobalHelper::method() === 'POST') {
+            CSRF::verifToken(GlobalHelper::post('token'), $router, 'admin_post_comments', $params['id']);
             $notify = new AdminNotify();
             $commentManager = new AdminManager();
             $commentManager->attach($notify);
@@ -193,7 +205,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Hydrate Post Object
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param string $id
      * @return Post|null

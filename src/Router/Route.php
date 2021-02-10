@@ -74,7 +74,7 @@ class Route
         return $this->name;
     }
     /**
-     * Undocumented function
+     * Function that execute Controller method
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.ExitExpression)
      * @param Router $router
@@ -85,8 +85,8 @@ class Route
         if (str_contains($this->getName(), 'admin')) {
             try {
                 \App\Helpers\Auth::isConnect();
-                $isAdmin = \App\Helpers\Auth::isAdmin();
-                if (!$isAdmin) {
+                // $isAdmin = \App\Helpers\Auth::isAdmin();
+                if (!\App\Helpers\Auth::isAdmin()) {
                     header('Location: ' . $router->generate('login') . '?denied=1');
                     die;
                 }

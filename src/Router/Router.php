@@ -2,6 +2,7 @@
 
 namespace App\Router;
 
+use App\Config\Database;
 use App\Helpers\GlobalHelper;
 
 class Router
@@ -46,7 +47,7 @@ class Router
     }
 
     /**
-     * Undocumented function
+     * Function that checks if route exists
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @return void
      */
@@ -76,7 +77,7 @@ class Router
     }
 
     /**
-     * Undocumented function
+     * Function that generate route
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param string $name
      * @param array $params
@@ -98,7 +99,7 @@ class Router
                     $path .= "$slug-$id";
                 } elseif (array_key_exists("id", $params)) {
                     $id = $params['id'];
-                    $path .= "$id";
+                    $path .= $id;
                 }
                 $route[$action][$key]->addParams($params);
             }

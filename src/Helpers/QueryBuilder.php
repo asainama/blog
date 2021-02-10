@@ -37,7 +37,7 @@ class QueryBuilder
     private $columns = [];
 
     /**
-     * Undocumented function
+     * Function that init PDO
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function __construct()

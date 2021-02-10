@@ -20,7 +20,7 @@ class DotEnv
     }
 
     /**
-     * Undocumented function
+     * Function that loads environment variables
      * @SuppressWarnings(PHPMD.Superglobals)
      * @return void
      */

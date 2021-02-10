@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Config\Database;
+
 abstract class GlobalHelper
 {
     public static function method()
@@ -14,14 +16,24 @@ abstract class GlobalHelper
         return filter_input(INPUT_SERVER, $name);
     }
 
+    /**
+     * Function that return Get variable
+     * @param string $name
+     * @return string|null|false
+     */
     public static function get(string $name)
     {
-        return filter_input(INPUT_GET, $name);
+        return filter_input(INPUT_GET, $name, FILTER_SANITIZE_SPECIAL_CHARS);
     }
-    
+    /**
+     * Function that return Post variable
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @param string $name
+     * @return string|null|false
+     */
     public static function post(string $name)
     {
-        return filter_input(INPUT_POST, $name);
+        return (filter_input(INPUT_POST, $name));
     }
 
     public static function allPost(): ?array
