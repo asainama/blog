@@ -85,8 +85,7 @@ class User
      */
     public function getEmail()
     {
-        dd(htmlspecialchars($this->email));
-        return htmlspecialchars($this->email);
+        return $this->email;
     }
 
     /**
@@ -96,7 +95,8 @@ class User
      */
     public function setEmail($email)
     {
-        $this->email = \App\Config\Database::connect()->quote($email);
+        $this->email = $email;
+
         return $this;
     }
 
