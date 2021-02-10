@@ -16,7 +16,7 @@ if (getenv('APP_ENV') === 'dev') {
     $whoops->register();
 }
 if (GlobalHelper::get('page') === '1') {
-    $uri = explode('?', GlobalHelper::serverMethod('RESQUEST_URI'))[0];
+    $uri = explode('?', GlobalHelper::serverMethod('REQUEST_URI'))[0];
     $get = GlobalHelper::allGet();
     unset($get['page']);
     $query = http_build_query($get);
@@ -28,7 +28,7 @@ if (GlobalHelper::get('page') === '1') {
     die;
 }
 
-$router = new Router(GlobalHelper::serverMethod('RESQUEST_URI'));
+$router = new Router(GlobalHelper::serverMethod('REQUEST_URI'));
 
 $router
     ->get('/', 'HomeController#index', 'index')

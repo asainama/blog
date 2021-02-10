@@ -60,7 +60,7 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * Undocumented function
+     * Function that init csrf
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @return string|null
      */
@@ -78,7 +78,7 @@ class AppExtension extends AbstractExtension
         return $content .= "</div>";
     }
     /**
-     * Undocumented function
+     * Function that checks if $_GET[$name] exists and return int value
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param string $name
      * @return boolean
@@ -94,7 +94,7 @@ class AppExtension extends AbstractExtension
         return 2;
     }
     /**
-     * Undocumented function
+     * Function that checks if auth login
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @return boolean
      */
@@ -108,7 +108,7 @@ class AppExtension extends AbstractExtension
         return true;
     }
     /**
-     * Undocumented function
+     * Function that checks admin login
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @return boolean
      */
@@ -203,7 +203,7 @@ HTML;
         return $this->getLink($link, 'Page précédente');
     }
     /**
-     * Undocumented function
+     * Function that return CurrentPage
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @return integer
      */
@@ -233,6 +233,10 @@ HTML;
                 case "img":
                     // $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.$file;
                     $path = '/assets/images/' . $file;
+                    break;
+                case "file":
+                    // $path = dirname(__DIR__).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.$file;
+                    $path = '/assets/uploads/' . $file;
                     break;
             }
         }

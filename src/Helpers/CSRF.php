@@ -7,7 +7,7 @@ use App\Router\Router;
 class CSRF
 {
     /**
-     * Undocumented function
+     * Function that create token
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @return string|null
@@ -23,7 +23,7 @@ HTML;
     }
 
     /**
-     * Undocumented function
+     * Function that checks token
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.ExitExpression)
@@ -32,7 +32,7 @@ HTML;
      * @param string $name
      * @return boolean
      */
-    public static function verifToken(?string $token = null, Router $router, string $name): bool
+    public static function verifToken(?string $token = null, Router $router, string $name, $id = null): bool
     {
         SessionHelper::sessionStart();
         if (isset($_SESSION['token']) && $_SESSION['token'] === $token) {
@@ -40,7 +40,11 @@ HTML;
         }
         unset($_SESSION['token']);
         http_response_code(302);
-        header('Location: ' . $router->generate($name) . '?accesstoken=1');
+        $path = $router->generate($name);
+        if ($id !== null) {
+            $path .= $id;
+        }
+        header('Location: ' . $path . '?accesstoken=1');
         die;
     }
 }

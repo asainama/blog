@@ -16,7 +16,7 @@ use App\Validator\SignInValidator;
 class AuthentificationController extends AbstractController
 {
     /**
-     * Undocumented function
+     * Return Login Page View
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @return void
@@ -42,7 +42,7 @@ class AuthentificationController extends AbstractController
         }
     }
     /**
-     * Undocumented function
+     * Return SignIn View
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @return void
@@ -87,7 +87,7 @@ class AuthentificationController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Return Code View
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.ExitExpression)
@@ -141,7 +141,7 @@ class AuthentificationController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Function who disconnet Auth
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @param Router $router
      * @return void
@@ -152,7 +152,7 @@ class AuthentificationController extends AbstractController
     }
 
     /**
-     * Undocumented function
+     * Function that checks if the user is in the database
      * @SuppressWarnings(PHPMD.StaticAccess)
      * @SuppressWarnings(PHPMD.Superglobals)
      * @SuppressWarnings(PHPMD.ExitExpression)

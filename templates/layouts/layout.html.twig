@@ -6,7 +6,6 @@
     <link rel="shortcut icon" href="{{assets("favicon.png",{"type":"img"})}}" type="image/x-icon">
     <meta name="description" content="Ce site est un blog"> <!-- Meta Description -->
     <link rel="stylesheet" href="{{assets("style.css",{"type":"css"})}}">
-    {# <link rel="stylesheet" href="{{asset("style.css")}}"> #}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -58,9 +57,9 @@
                 </ul>
                 <div class="footer__socials">
                     <ul>
-                        <li class="footer__socials__item"><a href="#" class="footer__socials__a">Dribbble</a><li/>
-                        <li class="footer__socials__item"><a href="#" class="footer__socials__a">Twitter</a></li>
-                        <li class="footer__socials__item"><a href="#" class="footer__socials__a">Github</a></li>
+                        <li class="footer__socials__item"><a target="_blank" href="https://github.com/asainama" class="footer__socials__a"><img class="navbar__img" src="{{assets("github.png",{"type":"img"})}}" alt="github"></a><li/>
+                        <li class="footer__socials__item"><a target="_blank" href="https://www.linkedin.com/in/sylvain-aïnama-2169041b8/" class="footer__socials__a"><img class="navbar__img" src="{{assets("linkedin.png",{"type":"img"})}}" alt="linkedin"></a></li>
+                        <li class="footer__socials__item"><a target="_blank" href="https://twitter.com/AinamaSylvain" class="footer__socials__a"><img class="navbar__img" src="{{assets("twitter.png",{"type":"img"})}}" alt="twitter"></a></li>
                     </ul>
                 </div>
             </div>

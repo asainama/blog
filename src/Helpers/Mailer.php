@@ -21,7 +21,7 @@ class Mailer
     private $mailer;
 
     /**
-     * Init Database
+     * Init Mailer
      * @return void
      */
     public function __construct()
@@ -50,7 +50,7 @@ class Mailer
     }
 
     /**
-     * Undocumented function
+     * Function that send Message Contact
      * @SuppressWarnings(PHPMD.ExitExpression)
      * @param Contact $contact
      * @param Router $router

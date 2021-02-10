@@ -58,6 +58,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
+  overflow: hidden;
 }
 
 a {
@@ -829,6 +830,7 @@ input:checked + .slider::before {
 
 #contact {
   padding-top: 1em;
+  padding-right: 1em;
 }
 
 .contact_content {
@@ -986,6 +988,10 @@ footer .row {
 
   .paginate__action .btn {
     margin: 1em 0;
+  }
+
+  .login{
+    width: 90%;
   }
 }
 @media (max-width: 576px) {
