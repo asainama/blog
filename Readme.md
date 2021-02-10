@@ -2,22 +2,22 @@
     Ce site est un blog dans le cadre de la formation OC.
 ##  Prérequis
 
-    - [*] PHP >= 7.1
-    - [*] Mysql
-    - [*] Composer
+- PHP >= 7.1
+- Mysql
+- Composer
   
 ## Installation
 
 Pour installer le projet:
 
     - Configurer le projet à partir la variable .env
-    > Se référer au fichier .env.test
+    - Se référer au fichier .env.test
     - Utiliser le fichier bd.sql pour créer la base de données
     - Installer les packages avec la commande:
      
-    ```
-        composer install
-    ```
+```
+    composer install
+```
 
 ### Charger la base données
 
