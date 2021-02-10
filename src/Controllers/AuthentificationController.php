@@ -182,7 +182,7 @@ class AuthentificationController extends AbstractController
             die;
         }
         if (GlobalHelper::post('password')) {
-            if (password_verify($_POST['password'], $user2->getPassword())) {
+            if (password_verify(GlobalHelper::post('password'), $user2->getPassword())) {
                 (new SessionHelper())->sessionStart();
                 if ($user2->getValidate() === "0") {
                     $_SESSION['user'] = json_encode($user2->getArrayFromObject());

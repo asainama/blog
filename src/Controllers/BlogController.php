@@ -97,7 +97,7 @@ class BlogController extends AbstractController
                 SessionHelper::sessionStart();
                 $id = json_decode($_SESSION['auth'], true)['id'];
                 $comment = new Comment();
-                $comment->setContent(isset($_POST['content']) ? $_POST['content'] : null);
+                $comment->setContent(GlobalHelper::post('content'));
                 $comment->setCreatedAt(new DateTime());
                 $comment->setValidate(0);
                 $comment->setUserId($id);
