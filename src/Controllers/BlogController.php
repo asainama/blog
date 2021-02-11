@@ -133,7 +133,7 @@ class BlogController extends AbstractController
                         ]
                     );
                 }
-                // TODO: Email de demande de Validation
+                // TODO: Email de demande de Validation de la part de l'utilisateur
                 // Oberserver Pattern
                 return $this->twig->render(
                     '/post/show.html.twig',
