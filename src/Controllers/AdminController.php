@@ -34,7 +34,6 @@ class AdminController extends AbstractController
         if ($currentPage > $pages) {
             throw new \Exception('Cette page n\'existe pas');
         }
-        // TODO: requete de nombres de commentaires par post nom comments
         $query = (new QueryBuilder())
                 ->select('Post.*,
                     (SELECT COUNT(*) 
@@ -85,11 +84,11 @@ class AdminController extends AbstractController
             $this->validatePost($post, $router, 'admin/post/edit.html.twig', 'update', 2);
         } elseif (GlobalHelper::method() === 'GET') {
             $query = (new QueryBuilder())
-                    ->select()
-                    ->from('Post')
-                    ->where('id = :id')
-                    ->params(['id' => $id])
-                    ->execute();
+            ->select()
+            ->from('Post')
+            ->where('id = :id')
+            ->params(['id' => $id])
+            ->execute();
             $query->setFetchMode(PDO::FETCH_CLASS, Post::class);
             $post = $query->fetch();
             return $this->twig->render(

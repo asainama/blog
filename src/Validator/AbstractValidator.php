@@ -66,7 +66,7 @@ abstract class AbstractValidator
                                 break;
                             case 'bool':
                                 $itemValue = boolval($itemValue);
-                                if (!filter_var($itemValue, FILTER_VALIDATE_BOOLEAN)) {
+                                if (!is_bool($itemValue)) {
                                     $this->addError($item, ucwords($item)
                                     . ' n\'est pas une valeur booléenne valide');
                                 }
