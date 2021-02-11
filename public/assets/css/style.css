@@ -577,7 +577,8 @@ tbody > tr > td:nth-child(3) > .btn.success::after {
   }
 
   tr {
-    margin-bottom: 1.5em;
+    margin-bottom: 3.5em;
+    padding: 0 1em;
   }
 
   td::before {
