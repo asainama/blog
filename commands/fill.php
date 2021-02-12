@@ -9,7 +9,7 @@ $faker = Faker\Factory::create('fr_FR');
 $pdo = new PDO(
     "mysql:dbname=" . getenv('DB_NAME') . ";host=" . getenv('DB_HOST'),
     getenv('DB_USER'),
-    getenv('DB_USER'),
+    getenv('DB_PASSWORD'),
     [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
