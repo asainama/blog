@@ -3,6 +3,21 @@
 
 Ce site est un blog dans le cadre de la formation OC.
 
+Le projet est donc de développer votre blog professionnel. Ce site web se décompose en deux grands groupes de pages :
+
+- les pages utiles à tous les visiteurs ;
+- les pages permettant d’administrer votre blog.
+
+Voici la liste des pages qui devront être accessibles depuis votre site web :
+
+- la page d'accueil ;
+- la page listant l’ensemble des blog posts ;
+- la page affichant un blog post ;
+- la page permettant d’ajouter un blog post ;
+- la page permettant de modifier un blog post ;
+- les pages permettant de modifier/supprimer un blog post ;
+- les pages de connexion/enregistrement des utilisateurs.
+
 ## Prérequis
 
 - PHP >= 7.1
@@ -55,7 +70,7 @@ Le fichier devra être construit comme ceci:
 Pour charger la base données avec un jeu de tests:
 
 ```bash
-    php .\commands\fill.php
+    php ./commands/fill.php
 ```
 
 ### Lancer le projet
@@ -70,5 +85,5 @@ Pour lancer le projet, il est possible d'utiliser (wamp\xampp...) ou:
 
 Compte admin:
 
-    - email : s@s.fr
-    - mdp : admin
+- email : s@s.fr
+- mdp : admin
