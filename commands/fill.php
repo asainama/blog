@@ -2,14 +2,14 @@
 
 use App\Config\DotEnv;
 
-require dirname(__DIR__) . '../vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-(new DotEnv(ROOT . '.env'))->load();
+(new DotEnv(dirname(__DIR__) . DIRECTORY_SEPARATOR . '.env'))->load();
 $faker = Faker\Factory::create('fr_FR');
 $pdo = new PDO(
-    "mysql:dbname=" . getenv('DB_NAME') . ";host=" . getenv('DB_HOST') . ","
-    . getenv('DB_USER') . ","
-    . getenv('DB_USER'),
+    "mysql:dbname=" . getenv('DB_NAME') . ";host=" . getenv('DB_HOST'),
+    getenv('DB_USER'),
+    getenv('DB_USER'),
     [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
