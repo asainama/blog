@@ -1,5 +1,6 @@
+# Blog
 
-# Blog OC
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/33a24272cf9f4e90bf63cb5989587b8a)](https://app.codacy.com/gh/asainama/blog?utm_source=github.com&utm_medium=referral&utm_content=asainama/blog&utm_campaign=Badge_Grade)
 
 Ce site est un blog dans le cadre de la formation OC.
 
