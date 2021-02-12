@@ -1,4 +1,4 @@
-# Blog
+# BlogOC
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/33a24272cf9f4e90bf63cb5989587b8a)](https://app.codacy.com/gh/asainama/blog?utm_source=github.com&utm_medium=referral&utm_content=asainama/blog&utm_campaign=Badge_Grade)
 
@@ -64,6 +64,18 @@ Le fichier devra être construit comme ceci:
     MAILER_PROTOCOLE=''
     MAILER_USER=''
     MAILER_PASS=''
+```
+
+
+#### Exemple de configuration SwiftMailer Gmail
+
+```bash
+# Swift Mailer
+    MAILER_TRANSPORT=smtp.gmail.com
+    MAILER_PORT=587
+    MAILER_PROTOCOLE=tls
+    MAILER_USER=exemple@gmail.com
+    MAILER_PASS=password
 ```
 
 ### Charger la base données
