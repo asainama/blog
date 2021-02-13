@@ -6,9 +6,15 @@
             <h1 class="fromLeft">Tous les <span>articles</span></h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, deserunt.</p>
         </div>
-        {% for post in posts %}
-            {% include ('/post/card.html.twig') %}
-        {% endfor %}
+        {% if posts != false %}
+            {% for post in posts %}
+                {% include ('/post/card.html.twig') %}
+            {% endfor %}
+        {% else %}
+            <div class="post__empty">
+                Aucun article disponible
+            </div>
+        {% endif %}
         {% set link = router.generate('blog') %}
         {% include ('/post/paginate.html.twig') %}
     </div>
