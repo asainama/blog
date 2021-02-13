@@ -32,6 +32,19 @@ class AdminController extends AbstractController
         $count = (new QueryBuilder())->from("Post")->count();
         $pages = ceil($count / 12);
         if ($currentPage > $pages) {
+            $query = (new QueryBuilder())
+                    ->from('Post')
+                    ->execute();
+            if (empty($query->fetchAll())) {
+                return $this->twig->render(
+                    'admin/post/index.html.twig',
+                    [
+                        'posts' => [],
+                        'router' => $router,
+                        'pages' => $pages
+                    ]
+                );
+            }
             throw new \Exception('Cette page n\'existe pas');
         }
         $query = (new QueryBuilder())

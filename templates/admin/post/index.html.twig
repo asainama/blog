@@ -33,6 +33,7 @@
         </div>
     {% endif %}
     <a href="{{router.generate('admin_post_new')}}" class="btn primary">Ajouter un article</a>
+    {% if posts != false %}
     <table>
         <thead>
             <th>ID</th>
@@ -70,6 +71,11 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <div class="post__empty">
+            Aucun article crée
+        </div>
+    {% endif %}
     {% set link = router.generate('admin_posts') %}
     {% include ('/post/paginate.html.twig') %}
 </div>

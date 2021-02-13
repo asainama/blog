@@ -323,6 +323,15 @@ header {
   font-size: 1.8rem;
 }
 
+.post__empty {
+  display: block;
+  width: 100%;
+  margin: 5em auto;
+  font-weight: 600;
+  text-align: center;
+  font-size: 2rem;
+}
+
 .paginate {
   padding: 2em 0;
   display: block;
